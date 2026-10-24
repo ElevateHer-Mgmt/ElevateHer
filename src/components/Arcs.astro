@@ -1,0 +1,14 @@
+---
+/** Arcs concentriques en filet fin, écho du badge rond. À placer dans un parent relative + overflow-hidden. */
+interface Props { class?: string; tone?: 'rose' | 'cream'; size?: 'md' | 'lg' }
+const { class: cls = 'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2', tone = 'rose', size = 'lg' } = Astro.props;
+const ring = tone === 'cream' ? 'border-cream' : 'border-rose';
+const outer = size === 'lg' ? 'h-[52rem] w-[52rem] md:h-[72rem] md:w-[72rem]' : 'h-[40rem] w-[40rem] md:h-[56rem] md:w-[56rem]';
+const inset1 = size === 'lg' ? 'inset-16 md:inset-28' : 'inset-12 md:inset-20';
+const inset2 = size === 'lg' ? 'inset-32 md:inset-56' : 'inset-24 md:inset-40';
+---
+<div class:list={['pointer-events-none absolute', cls]} aria-hidden="true" data-arcs>
+  <div class:list={['rounded-full border', ring, outer, tone === 'cream' ? 'opacity-20' : 'opacity-50']} data-arc></div>
+  <div class:list={['absolute rounded-full border', ring, inset1, tone === 'cream' ? 'opacity-25' : 'opacity-60']} data-arc></div>
+  <div class:list={['absolute rounded-full border', ring, inset2, tone === 'cream' ? 'opacity-30' : 'opacity-70']} data-arc></div>
+</div>

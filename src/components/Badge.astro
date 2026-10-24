@@ -1,0 +1,15 @@
+---
+/** Badge rond en sceau décoratif, rotation très lente. */
+import { Image } from 'astro:assets';
+import badge from '../assets/elevate-her-badge.png';
+interface Props { class?: string; spin?: boolean }
+const { class: cls = 'h-32 w-32', spin = true } = Astro.props;
+---
+<div class:list={['pointer-events-none select-none', cls]} aria-hidden="true">
+  <Image src={badge} alt="" width={320} height={320} class:list={['h-full w-full', spin && 'badge-spin']} loading="lazy" decoding="async" />
+</div>
+<style>
+  .badge-spin { animation: badge-spin 70s linear infinite; }
+  @keyframes badge-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .badge-spin { animation: none; } }
+</style>

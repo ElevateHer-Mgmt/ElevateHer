@@ -1,0 +1,23 @@
+---
+/** Bandeau défilant de phrases, séparées par ✦. Arrêté si prefers-reduced-motion. */
+import Star from './Star.astro';
+interface Props { items: string[]; class?: string; duration?: number; [key: string]: unknown }
+const { items, class: cls = '', duration = 48, ...rest } = Astro.props;
+---
+<div class:list={['marquee relative overflow-hidden', cls]} {...rest}>
+  <p class="sr-only">{items.join('. ')}.</p>
+  <div class="marquee-track flex w-max items-center" style={`--marquee-duration:${duration}s`} aria-hidden="true">
+    {[0, 1].map(() => (
+      <div class="flex shrink-0 items-center">
+        {items.map((item) => (
+          <span class="label flex items-center gap-8 whitespace-nowrap px-4">{item}<Star class="h-2.5 w-2.5 text-rose" /></span>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>
+<style>
+  .marquee-track { animation: marquee var(--marquee-duration) linear infinite; }
+  @keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+</style>

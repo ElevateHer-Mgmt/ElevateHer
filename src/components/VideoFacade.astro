@@ -1,0 +1,37 @@
+---
+/**
+ * Façade vidéo : miniature cliquable, le lecteur YouTube ou Vimeo n'est chargé qu'au clic.
+ * videoId vide → simple emplacement (poster) sans bouton.
+ */
+import Media from './Media.astro';
+interface Props { videoId: string; provider?: 'youtube' | 'vimeo'; poster: string; title: string; class?: string }
+const { videoId, provider = 'youtube', poster, title, class: cls = '' } = Astro.props;
+const src = provider === 'vimeo'
+  ? `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`
+  : `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+---
+<div class:list={['relative overflow-hidden rounded-[2rem]', cls]} data-video-facade={videoId ? src : undefined}>
+  <Media name={poster} ratio="16 / 9" alt={title} showLabel={!videoId} />
+  {videoId && (
+    <button type="button" class="group absolute inset-0 flex cursor-pointer items-center justify-center" aria-label={`Play: ${title}`} data-facade-play>
+      <span class="flex h-20 w-20 items-center justify-center rounded-full bg-cream/90 text-ink shadow-soft transition-transform duration-500 group-hover:scale-105">
+        <svg class="ml-1 h-6 w-6" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
+      </span>
+    </button>
+  )}
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-video-facade]').forEach((box) => {
+    const btn = box.querySelector<HTMLButtonElement>('[data-facade-play]');
+    btn?.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = box.dataset.videoFacade!;
+      iframe.title = btn.getAttribute('aria-label') ?? 'Video';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.className = 'absolute inset-0 h-full w-full';
+      box.appendChild(iframe);
+      btn.remove();
+    }, { once: true });
+  });
+</script>

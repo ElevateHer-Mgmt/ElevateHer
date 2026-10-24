@@ -1,0 +1,264 @@
+---
+/**
+ * Accueil — direction « Le Club » : arcs du badge, sceau tournant, menu flottant,
+ * formes en arche, chapitre encre pour le Private Club, parcours horizontal épinglé.
+ */
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ApplyCta from '../components/ApplyCta.astro';
+import Arcs from '../components/Arcs.astro';
+import Marquee from '../components/Marquee.astro';
+import Media from '../components/Media.astro';
+import Logo from '../components/Logo.astro';
+import Star from '../components/Star.astro';
+import Badge from '../components/Badge.astro';
+import VideoFacade from '../components/VideoFacade.astro';
+import { home as h } from '../data/home';
+import { accent } from '../lib/accent';
+const gutter = 'clamp(1rem, 0.5rem + 2.5vw, 3.5rem)';
+---
+<Base title={h.meta.title} description={h.meta.description}>
+  <Header />
+  <main id="main">
+
+    <!-- 1. HERO -->
+    <section class="relative overflow-hidden bg-rose-pale/35 pt-36 md:pt-44" data-tone="tint">
+      <Arcs class="left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2" />
+      <div class="container-page relative text-center">
+        <p class="rise label-sm inline-flex items-center gap-3 rounded-pill bg-white/70 px-5 py-2.5 text-rose-deep ring-1 ring-rose/50" style="--i:0">
+          <Star class="h-2 w-2 text-rose" />{h.hero.eyebrow}<Star class="h-2 w-2 text-rose" />
+        </p>
+        <div class="rise mt-10" style="--i:1">
+          <Logo class="mx-auto h-28 sm:h-36 md:h-44 lg:h-52" />
+        </div>
+        <h1 class="rise h2 mx-auto mt-10 max-w-3xl" style="--i:2" set:html={accent(h.hero.title)}></h1>
+        <p class="rise lead mx-auto mt-6 max-w-2xl text-taupe" style="--i:3">{h.hero.text}</p>
+        <div class="rise mt-10 flex flex-wrap items-center justify-center gap-6" style="--i:4">
+          <a href={h.hero.cta.href} class="btn btn-ink">{h.hero.cta.label}</a>
+          <a href={h.hero.secondary.href} class="link-line">{h.hero.secondary.label}</a>
+        </div>
+        <p class="rise label-sm mt-8 text-taupe" style="--i:5">{h.hero.note.join(' · ')}</p>
+      </div>
+      <div class="rise relative mx-auto mt-14 w-[min(84vw,26rem)] md:mt-20 md:w-[min(50vw,32rem)]" style="--i:4">
+        <Media name={h.hero.media} kind="video" ratio="4 / 5" class="rounded-t-full" eager parallax={6} alt={h.hero.alt} />
+      </div>
+      <Badge class="absolute bottom-12 left-6 hidden h-32 w-32 md:block lg:left-14 lg:h-40 lg:w-40" />
+    </section>
+
+    <!-- 2. BANDEAU -->
+    <Marquee items={h.marquee} class="bg-rose-pale py-5 text-ink" data-tone="rose" />
+
+    <!-- 3. DÉCLARATION -->
+    <section class="container-page py-24 text-center md:py-36">
+      <p class="label text-rose-deep" data-reveal>{h.statement.eyebrow}</p>
+      <h2 class="h2 mx-auto mt-6 max-w-4xl" data-split set:html={accent(h.statement.title)}></h2>
+      <p class="lead mx-auto mt-8 max-w-2xl text-taupe" data-reveal>{h.statement.text}</p>
+      <div class="mx-auto mt-20 grid max-w-5xl gap-6 md:grid-cols-3" data-reveal-group>
+        {h.statement.beats.map((b) => (
+          <div class="lift rounded-t-full bg-white px-8 pb-10 pt-20 shadow-soft" data-reveal-item>
+            <Star class="mx-auto h-3 w-3 text-rose" />
+            <h3 class="h3 mt-8">{b.title}</h3>
+            <p class="mt-4 text-taupe">{b.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 3b. CHIFFRES CLÉS (masqué tant que h.numbers.enabled est faux) -->
+    {h.numbers.enabled && (
+      <section class="container-page pb-24 md:pb-36">
+        <p class="label text-center text-rose-deep" data-reveal>{h.numbers.eyebrow}</p>
+        <ul class="mx-auto mt-10 grid max-w-4xl gap-10 border-y border-rose/50 py-10 text-center sm:grid-cols-3" data-reveal-group>
+          {h.numbers.items.map((n) => (
+            <li data-reveal-item>
+              <p class="font-display text-6xl font-light leading-none" data-count={/^\d+$/.test(n.value) ? n.value : undefined}>{n.value}</p>
+              <p class="label-sm mt-4 text-taupe">{n.label}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- 4. LE PARCOURS (signature, horizontal) -->
+    <section id="path" class="relative overflow-hidden border-t border-rose/50">
+      <div class="path-pin flex flex-col justify-center overflow-hidden py-20 lg:min-h-[100svh] lg:py-0">
+        <div class="container-page flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p class="label text-rose-deep" data-reveal>{h.path.eyebrow}</p>
+            <h2 class="h2 mt-4" data-split set:html={accent(h.path.title)}></h2>
+          </div>
+          <div class="flex items-end gap-8" data-reveal>
+            <p class="max-w-xs text-taupe">{h.path.intro}</p>
+            <p class="label-sm whitespace-nowrap tabular-nums text-ink" data-counter>01 / 05</p>
+          </div>
+        </div>
+        <div class="mt-10 h-px w-full bg-rose/50"><div class="h-px w-full origin-left scale-x-0 bg-ink" data-progress></div></div>
+        <div class="path-track mt-10 w-full snap-x snap-mandatory overflow-x-auto pb-6 focus-visible:outline-offset-[-4px] lg:snap-none lg:overflow-hidden" data-track tabindex="0" role="region" aria-label="The path, five steps">
+          <div class="flex w-max gap-6 lg:gap-12" style={`padding-inline:${gutter}`} data-rail>
+            {h.path.steps.map((s) => (
+              <article class="w-[min(84vw,24rem)] shrink-0 snap-start lg:w-[min(46vw,38rem)]" data-panel>
+                <div class="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-8">
+                  <div data-panel-media>
+                    <Media name={s.media} ratio="4 / 5" class="rounded-t-full" alt={s.alt} />
+                  </div>
+                  <div>
+                    <p class="font-display text-7xl font-light leading-none text-ink">{s.n}</p>
+                    <p class="label mt-4 text-rose-deep">{s.name}</p>
+                    <h3 class="h3 mt-4">{s.title}</h3>
+                    <p class="mt-4 text-taupe">{s.text}</p>
+                    <ul class="mt-6 flex flex-wrap gap-2">
+                      {s.services.map((sv) => (<li class="label-sm rounded-pill px-3 py-1.5 ring-1 ring-rose">{sv}</li>))}
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            ))}
+            <div class="shrink-0" style={`width:${gutter}`} aria-hidden="true"></div>
+          </div>
+        </div>
+        <p class="container-page mt-4"><a href={h.path.outro.href} class="link-line">{h.path.outro.label}</a></p>
+      </div>
+    </section>
+
+    <!-- 5. CE QU'ELLE REÇOIT -->
+    <section id="receive" class="container-page border-t border-rose/50 py-24 md:py-36">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="label text-rose-deep" data-reveal>{h.receive.eyebrow}</p>
+        <h2 class="h2 mt-6" data-split set:html={accent(h.receive.title)}></h2>
+        <p class="lead mt-6 text-taupe" data-reveal>{h.receive.intro}</p>
+      </div>
+      <ul class="mx-auto mt-16 grid max-w-5xl gap-x-12 md:grid-cols-2" data-reveal-group>
+        {h.receive.cards.map((c) => (
+          <li class="flex gap-4 border-b border-rose/50 py-6" data-reveal-item>
+            <Star class="row-star mt-2.5 h-2.5 w-2.5 shrink-0 text-rose" />
+            <div>
+              <h3 class="font-display text-2xl">{c.title}</h3>
+              <p class="mt-2 text-taupe">{c.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div id="protection" class="mx-auto mt-16 max-w-3xl rounded-t-full bg-rose-pale px-8 pb-12 pt-20 text-center md:px-16" data-reveal data-tone="rose">
+        <p class="label flex items-center justify-center gap-3 text-rose-deep"><Star class="h-2.5 w-2.5 text-rose-deep" />Protection</p>
+        <h3 class="h3 mt-4">{h.receive.protection.title}</h3>
+        <p class="mx-auto mt-3 text-ink/80">{h.receive.protection.text}</p>
+        <ul class="mt-8 grid gap-6 text-left md:grid-cols-2">
+          {h.receive.protection.items.map((p) => (
+            <li class="border-t border-ink/15 pt-4">
+              <h4 class="font-display text-xl">{p.title}</h4>
+              <p class="mt-2 text-ink/75">{p.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p class="mt-10 text-center" data-reveal><a href={h.receive.link.href} class="link-line">{h.receive.link.label}</a></p>
+    </section>
+
+    <!-- 6. ELLE RESTE LE VISAGE -->
+    <section class="container-page py-24 md:py-36">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div class="order-last lg:order-first">
+          <p class="label text-rose-deep" data-reveal>{h.face.eyebrow}</p>
+          <h2 class="h2 mt-6" data-split set:html={accent(h.face.title)}></h2>
+          <p class="lead mt-6 text-taupe" data-reveal>{h.face.text}</p>
+          <ul class="mt-10 grid gap-6 sm:grid-cols-2" data-reveal-group>
+            {h.face.points.map((p) => (
+              <li class="lift rounded-soft bg-white p-6 shadow-soft" data-reveal-item>
+                <h3 class="font-display text-2xl">{p.title}</h3>
+                <p class="mt-2 text-taupe">{p.text}</p>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-8 font-display text-xl italic leading-relaxed" data-reveal>{h.face.closing}</p>
+        </div>
+        <div data-reveal>
+          <Media name={h.face.media} ratio="4 / 5" class="mx-auto w-[min(100%,28rem)] rounded-t-full lg:ml-auto" parallax alt={h.face.alt} />
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. LE PRIVATE CLUB (chapitre encre) -->
+    <section class="relative overflow-hidden bg-ink py-28 text-cream md:py-44" style="--logo-ink: var(--color-cream); --logo-rose: var(--color-rose);">
+      <Arcs tone="cream" />
+      <div class="container-page relative text-center">
+        <p class="label text-rose" data-reveal>{h.club.eyebrow}</p>
+        <div class="mt-8" data-reveal="scale"><Logo class="mx-auto h-16 md:h-24" decorative /></div>
+        <h2 class="h2 mx-auto mt-10 max-w-4xl" data-split set:html={accent(h.club.title)}></h2>
+        <blockquote class="mx-auto mt-10 max-w-2xl font-display text-h3 italic text-cream/90" data-reveal><p class="mx-auto">“{h.club.quote}”</p></blockquote>
+        <p class="mx-auto mt-8 max-w-2xl text-cream/70" data-reveal>{h.club.text}</p>
+        <ul class="mx-auto mt-16 grid max-w-5xl gap-8 border-t border-cream/15 pt-10 md:grid-cols-3" data-reveal-group>
+          {h.club.facts.map((f) => (
+            <li data-reveal-item>
+              <Star class="mx-auto h-3 w-3 text-rose" />
+              <h3 class="mt-4 font-display text-2xl">{f.title}</h3>
+              <p class="mx-auto mt-2 text-cream/70">{f.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- 8. FILM DE MARQUE (masqué tant que h.film.enabled est faux) -->
+    {h.film.enabled && (
+      <section class="container-page py-24 md:py-36">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="label text-rose-deep" data-reveal>{h.film.eyebrow}</p>
+          <h2 class="h2 mt-6" data-split set:html={accent(h.film.title)}></h2>
+        </div>
+        <div class="mx-auto mt-12 max-w-5xl" data-reveal>
+          <VideoFacade videoId={h.film.videoId} poster={h.film.poster} title="Inside Elevate Her" />
+        </div>
+      </section>
+    )}
+
+    <!-- 9. RÉUSSITES (masqué tant que h.stories.enabled est faux) -->
+    {h.stories.enabled && (
+      <section class="container-page py-24 md:py-36">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="label text-rose-deep" data-reveal>{h.stories.eyebrow}</p>
+          <h2 class="h2 mt-6" data-split set:html={accent(h.stories.title)}></h2>
+        </div>
+        <ul class="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-3" data-reveal-group>
+          {h.stories.items.map((s) => (
+            <li class="rounded-t-full bg-white px-8 pb-10 pt-16 text-center shadow-soft" data-reveal-item>
+              <Star class="mx-auto h-3 w-3 text-rose" />
+              <p class="mt-6 font-display text-xl italic">“{s.quote}”</p>
+              <p class="label-sm mt-6 text-rose-deep">{s.name}</p>
+              <p class="text-small text-taupe">{s.role}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- 10. CANDIDATER EN 4 ÉTAPES -->
+    <section class="container-page py-24 md:py-36">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="label text-rose-deep" data-reveal>{h.apply.eyebrow}</p>
+        <h2 class="h2 mt-6" data-split set:html={accent(h.apply.title)}></h2>
+      </div>
+      <ol class="relative mx-auto mt-16 max-w-2xl border-l border-rose pl-10" data-reveal-group>
+        {h.apply.steps.map((s) => (
+          <li class="relative pb-12 last:pb-0" data-reveal-item>
+            <span class="absolute -left-12 top-1 flex h-4 w-4 items-center justify-center bg-cream" aria-hidden="true"><Star class="h-3.5 w-3.5 text-rose-deep" /></span>
+            <p class="label-sm text-taupe">{s.n}</p>
+            <h3 class="h3 mt-2">{s.title}</h3>
+            <p class="mt-3 text-taupe">{s.text}{s.todo && <span class="label-sm ml-2 text-rose-deep">{s.todo}</span>}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="mt-14 text-center" data-reveal><a href={h.apply.link.href} class="btn btn-outline">{h.apply.link.label}</a></p>
+    </section>
+
+    <ApplyCta />
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import { initPage } from '../scripts/page';
+  import { initPath } from '../scripts/path';
+  initPage();
+  initPath();
+</script>

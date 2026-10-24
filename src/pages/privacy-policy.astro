@@ -1,0 +1,5 @@
+---
+import LegalPage from '../layouts/LegalPage.astro';
+import { privacyPolicy as p } from '../data/legal';
+---
+<LegalPage title={p.meta.title} description={p.meta.description} eyebrow={p.eyebrow} heading={p.title} intro={p.intro} sections={p.sections} />

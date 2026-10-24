@@ -1,0 +1,40 @@
+---
+/** Gabarit des pages légales : hero court et sections en prose. */
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import ApplyCta from '../components/ApplyCta.astro';
+import type { LegalSection } from '../data/legal';
+interface Props { title: string; description: string; eyebrow: string; heading: string; intro?: string; sections: LegalSection[] }
+const { title, description, eyebrow, heading, intro, sections } = Astro.props;
+---
+<Base title={title} description={description}>
+  <Header />
+  <main id="main">
+    <PageHero eyebrow={eyebrow} title={heading} text={intro} class="pb-12 md:pb-16" />
+    <section class="container-page py-20 md:py-28">
+      <div class="mx-auto max-w-3xl">
+        {sections.map((s) => (
+          <article class="border-t border-rose/50 py-10 first:border-t-0 first:pt-0" data-reveal>
+            <h2 class="h3">{s.title}</h2>
+            {s.paragraphs?.map((p) => (<p class="mt-5 text-taupe">{p}</p>))}
+            {s.list && (
+              <ul class="mt-5 space-y-2 text-taupe">
+                {s.list.map((li) => (<li class="flex gap-3"><span class="mt-[0.7em] h-1 w-1 shrink-0 rounded-full bg-rose-deep" aria-hidden="true"></span><span>{li}</span></li>))}
+              </ul>
+            )}
+            {s.after?.map((p) => (<p class="mt-5 text-taupe">{p}</p>))}
+          </article>
+        ))}
+      </div>
+    </section>
+    <ApplyCta compact />
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import { initPage } from '../scripts/page';
+  initPage();
+</script>

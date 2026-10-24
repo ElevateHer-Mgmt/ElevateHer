@@ -1,0 +1,5 @@
+---
+import LegalPage from '../layouts/LegalPage.astro';
+import { legalNotice as l } from '../data/legal';
+---
+<LegalPage title={l.meta.title} description={l.meta.description} eyebrow={l.eyebrow} heading={l.title} sections={l.sections} />

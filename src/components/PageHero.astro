@@ -1,0 +1,20 @@
+---
+/** Hero des pages intérieures : centré, arcs en fond, sur-titre en pilule, titre avec mot accentué. */
+import Arcs from './Arcs.astro';
+import Star from './Star.astro';
+import { accent } from '../lib/accent';
+interface Props { eyebrow: string; title: string; text?: string; note?: string[]; class?: string }
+const { eyebrow, title, text, note, class: cls = '' } = Astro.props;
+---
+<section class:list={['relative overflow-hidden bg-rose-pale/35 pb-16 pt-36 md:pb-24 md:pt-48', cls]} data-tone="tint">
+  <Arcs size="md" class="left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2" />
+  <div class="container-page relative text-center">
+    <p class="rise label-sm inline-flex items-center gap-3 rounded-pill bg-white/70 px-5 py-2.5 text-rose-deep ring-1 ring-rose/50" style="--i:0">
+      <Star class="h-2 w-2 text-rose" />{eyebrow}<Star class="h-2 w-2 text-rose" />
+    </p>
+    <h1 class="rise title mx-auto mt-8 max-w-4xl" style="--i:1" set:html={accent(title)}></h1>
+    {text && <p class="rise lead mx-auto mt-6 max-w-2xl text-taupe" style="--i:2">{text}</p>}
+    {note && <p class="rise label-sm mt-8 text-taupe" style="--i:3">{note.join(' · ')}</p>}
+    <slot />
+  </div>
+</section>

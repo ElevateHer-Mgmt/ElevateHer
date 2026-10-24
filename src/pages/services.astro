@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import ApplyCta from '../components/ApplyCta.astro';
+import Arcs from '../components/Arcs.astro';
+import Media from '../components/Media.astro';
+import Star from '../components/Star.astro';
+import { services as s } from '../data/services';
+import { accent } from '../lib/accent';
+---
+<Base title={s.meta.title} description={s.meta.description}>
+  <Header />
+  <main id="main">
+    <PageHero eyebrow={s.hero.eyebrow} title={s.hero.title} text={s.hero.text} />
+
+    <!-- Sommaire ancré, épinglé sous le header -->
+    <nav class="sticky top-[4.75rem] z-30 border-b border-rose/40 bg-cream/85 backdrop-blur-md md:top-[5rem]" aria-label="On this page" data-anchors>
+      <ul class="container-page flex gap-2 overflow-x-auto py-3 [scrollbar-width:none]">
+        {s.anchors.map((an) => (
+          <li class="shrink-0">
+            <a href={an.href} class="label-sm inline-flex min-h-11 items-center rounded-pill px-4 text-taupe transition-colors duration-200 hover:text-ink data-active:bg-ink data-active:text-cream" data-anchor={an.href.slice(1)}>{an.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Chapitres du parcours -->
+    {s.chapters.map((c, i) => (
+      <section id={c.id} class="container-page scroll-mt-40 py-20 md:py-32" data-chapter={c.id}>
+        <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <div class:list={['lg:col-span-5', i % 2 === 1 ? 'lg:order-last' : '']} data-reveal>
+            <Media name={c.media} ratio="4 / 5" class="mx-auto w-[min(100%,26rem)] rounded-t-full" parallax alt={c.alt} />
+          </div>
+          <div class="lg:col-span-7">
+            <p class="font-display text-7xl font-light leading-none text-ink" data-reveal>{c.n}</p>
+            <p class="label mt-4 text-rose-deep" data-reveal>{c.name}</p>
+            <h2 class="h2 mt-5" data-split set:html={accent(c.title)}></h2>
+            {c.paragraphs.map((p) => (<p class="mt-6 text-taupe" data-reveal>{p}</p>))}
+            <p class="label-sm mt-10 text-taupe" data-reveal>Included</p>
+            <ul class="mt-4 divide-y divide-rose/50 border-y border-rose/50" data-reveal-group>
+              {c.included.map((inc) => (
+                <li class="flex gap-4 py-4" data-reveal-item>
+                  <Star class="row-star mt-2 h-2.5 w-2.5 shrink-0 text-rose" />
+                  <div>
+                    <h3 class="font-display text-xl">{inc.title}</h3>
+                    <p class="mt-1 text-taupe">{inc.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p class="mt-8 font-display text-xl italic leading-relaxed" data-reveal>{c.outcome}</p>
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <!-- Protection -->
+    <section id="protection" class="container-page scroll-mt-40 py-20 md:py-32" data-chapter="protection">
+      <div class="relative mx-auto max-w-3xl overflow-hidden rounded-t-full bg-rose-pale px-8 pb-12 pt-24 text-center md:px-16" data-reveal data-tone="rose">
+        <Arcs size="md" class="left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 scale-75" />
+        <div class="relative">
+          <p class="font-display text-7xl font-light leading-none text-ink">{s.protection.n}</p>
+          <p class="label mt-4 text-rose-deep">{s.protection.name}</p>
+          <h2 class="h2 mt-5" set:html={accent(s.protection.title)}></h2>
+          <p class="mx-auto mt-5 text-ink/80">{s.protection.text}</p>
+          <ul class="mt-10 grid gap-6 text-left md:grid-cols-2">
+            {s.protection.items.map((p) => (
+              <li class="border-t border-ink/15 pt-4">
+                <h3 class="font-display text-xl">{p.title}</h3>
+                <p class="mt-2 text-ink/75">{p.text}</p>
+              </li>
+            ))}
+          </ul>
+          <p class="label mt-10 flex items-center justify-center gap-3 text-ink"><Star class="h-2.5 w-2.5 text-rose-deep" />{s.protection.closing}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How we work -->
+    <section id="how-we-work" class="container-page scroll-mt-40 py-20 md:py-32" data-chapter="how-we-work">
+      <div class="grid gap-10 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <p class="font-display text-7xl font-light leading-none text-ink" data-reveal>{s.how.n}</p>
+          <p class="label mt-4 text-rose-deep" data-reveal>{s.how.name}</p>
+          <h2 class="h2 mt-5" data-split set:html={accent(s.how.title)}></h2>
+        </div>
+        <div class="lg:col-span-6 lg:col-start-7">
+          {s.how.paragraphs.map((p) => (<p class="lead mt-6 text-taupe first:mt-0" data-reveal>{p}</p>))}
+          <p class="mt-8" data-reveal><a href={s.how.link.href} class="link-line">{s.how.link.label}</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Is Elevate Her for you? -->
+    <section class="container-page pb-24 pt-10 md:pb-36">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="label text-rose-deep" data-reveal>{s.fit.eyebrow}</p>
+        <h2 class="h2 mt-6" data-split set:html={accent(s.fit.title)}></h2>
+        <p class="lead mt-6 text-taupe" data-reveal>{s.fit.intro}</p>
+      </div>
+      <ul class="mx-auto mt-12 max-w-2xl divide-y divide-rose/50 border-y border-rose/50" data-reveal-group>
+        {s.fit.items.map((item) => (
+          <li class="flex items-start gap-4 py-5" data-reveal-item>
+            <Star class="row-star mt-2.5 h-2.5 w-2.5 shrink-0 text-rose-deep" />
+            <p class="font-display text-xl">{item}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="mx-auto mt-10 max-w-2xl text-center text-taupe" data-reveal>{s.fit.closing} <span class="label-sm text-rose-deep">{s.fit.todo}</span></p>
+    </section>
+
+    <ApplyCta />
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import { initPage } from '../scripts/page';
+  initPage();
+
+  // Sommaire : surligne le chapitre visible (IntersectionObserver, sans dépendance au ticker)
+  const links = document.querySelectorAll<HTMLElement>('[data-anchor]');
+  const setActive = (id: string) => links.forEach((l) => l.toggleAttribute('data-active', l.dataset.anchor === id));
+  const chapters = [...document.querySelectorAll<HTMLElement>('[data-chapter]')];
+  const visible = new Map<string, number>();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => visible.set((e.target as HTMLElement).dataset.chapter ?? '', e.isIntersecting ? e.intersectionRatio : 0));
+    let best = ''; let ratio = 0;
+    visible.forEach((r, id) => { if (r > ratio) { ratio = r; best = id; } });
+    if (best) setActive(best);
+  }, { rootMargin: '-35% 0px -45% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
+  chapters.forEach((c) => io.observe(c));
+</script>

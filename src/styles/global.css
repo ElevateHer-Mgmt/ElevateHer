@@ -1,0 +1,343 @@
+/* ------------------------------------------------------------------
+   Elevate Her — feuille de style globale
+   Toutes les couleurs et polices viennent de brand/charte.md et sont
+   déclarées ici comme tokens Tailwind. Aucune valeur codée en dur ailleurs.
+   ------------------------------------------------------------------ */
+@import "tailwindcss";
+
+/* Polices auto-hébergées : fichiers de @fontsource-variable/*, restreints aux graisses 300-500 (Playfair) et au
+   sous-ensemble latin utilisé, axe optique conservé. Régénération : voir DEPLOIEMENT.md, section Polices. */
+@font-face {
+  font-family: "Playfair Variable";
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url("/fonts/playfair-opsz.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+2726, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Playfair Variable";
+  font-style: italic;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url("/fonts/playfair-opsz-italic.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Jost Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/jost-wght.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+2726, U+FEFF, U+FFFD;
+}
+
+@theme {
+  /* On efface la palette et les polices par défaut de Tailwind : seuls les tokens de la charte existent. */
+  --color-*: initial;
+  --font-*: initial;
+
+  --color-cream: #FFF8F0;        /* fond principal */
+  --color-ink: #1B1B1B;          /* textes, titres */
+  --color-rose: #D9A3A5;         /* rose poudré : logo, décor, filets. Jamais pour du texte */
+  --color-rose-accent: #B97A80;  /* mots en italique dans les grands titres (32 px et plus) */
+  --color-rose-pale: #EABDBD;    /* fonds de sections, bandeaux */
+  --color-rose-deep: #9E5C63;    /* liens, boutons (texte blanc), petits textes roses */
+  --color-taupe: #5C5452;        /* texte secondaire */
+  --color-white: #FFFFFF;        /* cartes, surfaces */
+
+  --font-display: "Playfair Variable", "Playfair", Georgia, serif;
+  --font-body: "Playfair Variable", "Playfair", Georgia, serif;
+  --font-label: "Jost Variable", "Jost", "Futura", sans-serif;
+
+  --tracking-label: 0.25em;
+  --tracking-label-wide: 0.32em;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Échelle typographique fluide */
+  --text-display: clamp(2.75rem, 1.6rem + 4.6vw, 6.75rem);
+  --text-display--line-height: 1;
+  --text-title: clamp(2.5rem, 1.5rem + 3.6vw, 5.25rem);
+  --text-title--line-height: 1.02;
+  --text-h2: clamp(2rem, 1.3rem + 2.6vw, 4.25rem);
+  --text-h2--line-height: 1.05;
+  --text-h3: clamp(1.5rem, 1.2rem + 1.1vw, 2.25rem);
+  --text-h3--line-height: 1.15;
+  --text-lead: clamp(1.1875rem, 1.05rem + 0.5vw, 1.5rem);
+  --text-lead--line-height: 1.5;
+  --text-body: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  --text-body--line-height: 1.6;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.4;
+  --text-label-sm: 0.6875rem;
+  --text-label-sm--line-height: 1.4;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.5;
+
+  --radius-soft: 1.25rem;
+  --radius-pill: 999px;
+  --shadow-soft: 0 1px 2px rgb(27 27 27 / 0.03), 0 12px 40px -12px rgb(27 27 27 / 0.08);
+}
+
+@layer base {
+  html {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  body {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    overflow-x: clip;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+  /* Mot accentué : italique rose, réservé aux grands titres */
+  h1 em, h2 em, .display em, .h2 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-rose-accent);
+  }
+  p { text-wrap: pretty; max-width: 65ch; }
+  /* Les libellés et les paragraphes centrés ne doivent pas être limités à 65ch :
+     sinon leur boîte, plus étroite que le bloc, se cale à gauche et le texte paraît décentré. */
+  p.label, p.label-sm, .text-center p:not([class*="max-w-"]) { max-width: none; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background-color: var(--color-rose-pale); color: var(--color-ink); }
+  :focus-visible {
+    outline: 2px solid var(--color-rose-deep);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+  img, video, svg { display: block; }
+  button { cursor: pointer; font: inherit; }
+}
+
+@utility label {
+  font-family: var(--font-label);
+  font-weight: 500;
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+@utility label-sm {
+  font-family: var(--font-label);
+  font-weight: 500;
+  font-size: var(--text-label-sm);
+  line-height: var(--text-label-sm--line-height);
+  letter-spacing: var(--tracking-label-wide);
+  text-transform: uppercase;
+}
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-display);
+  line-height: var(--text-display--line-height);
+  letter-spacing: -0.02em;
+}
+@utility title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-title);
+  line-height: var(--text-title--line-height);
+  letter-spacing: -0.018em;
+}
+@utility h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-h2);
+  line-height: var(--text-h2--line-height);
+  letter-spacing: -0.015em;
+}
+@utility h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-h3);
+  line-height: var(--text-h3--line-height);
+}
+@utility lead {
+  font-size: var(--text-lead);
+  line-height: var(--text-lead--line-height);
+  font-weight: 300;
+}
+
+/* Boutons */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-label);
+  font-weight: 500;
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color 250ms var(--ease-out-quint), color 250ms var(--ease-out-quint), box-shadow 250ms var(--ease-out-quint), transform 350ms var(--ease-out-quint), opacity 250ms;
+  cursor: pointer;
+  &:hover { transform: translateY(-1px); }
+  &:active { transform: translateY(0) scale(0.99); transition-duration: 80ms; }
+}
+@utility btn-primary {
+  background-color: var(--color-rose-deep);
+  color: var(--color-white);
+  &:hover { background-color: color-mix(in oklab, var(--color-rose-deep) 88%, var(--color-ink)); }
+}
+@utility btn-ink {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  &:hover { background-color: color-mix(in oklab, var(--color-ink) 85%, var(--color-rose-deep)); }
+}
+@utility btn-outline {
+  background-color: transparent;
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-ink) 50%, transparent);
+  &:hover { box-shadow: inset 0 0 0 1px var(--color-ink); }
+}
+@utility btn-cream {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  &:hover { background-color: var(--color-white); }
+}
+
+@utility btn-sm {
+  min-height: 2.75rem;
+  padding: 0.6rem 1.25rem;
+  font-size: var(--text-label-sm);
+}
+
+/* Lien texte avec filet qui se dessine */
+@utility link-line {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.2rem;
+  font-family: var(--font-label);
+  font-weight: 500;
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-rose-deep);
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background-color: currentColor;
+    transform-origin: left;
+    transform: scaleX(0.35);
+    transition: transform 400ms var(--ease-out-quint);
+  }
+  &:hover::after { transform: scaleX(1); }
+}
+
+/* Motif ✦ discret pour les emplacements médias et fonds */
+@utility star-pattern {
+  background-color: var(--color-rose-pale);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'><path d='M48 36c0 7 5 12 12 12-7 0-12 5-12 12 0-7-5-12-12-12 7 0 12-5 12-12z' fill='%23D9A3A5' fill-opacity='0.55'/></svg>");
+  background-size: 96px 96px;
+}
+
+/* Filet fin rose poudré */
+@utility rule-rose {
+  border-color: var(--color-rose);
+}
+
+/* Masque pour les bords des bandeaux défilants */
+@utility fade-x {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* Grille de page : gouttière 16 px mobile, respiration sur desktop */
+@utility container-page {
+  width: 100%;
+  max-width: 88rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 0.5rem + 2.5vw, 3.5rem);
+}
+
+/* Éléments animés : état initial neutre (sans JS, tout reste visible) */
+[data-reveal] { will-change: transform, opacity; }
+
+/* Entrée des hero en CSS pur : visible dès le premier rendu (LCP), sans attendre le JavaScript.
+   --i décale chaque élément de 110 ms. Désactivée si l'utilisatrice préfère moins de mouvement. */
+@keyframes rise {
+  from { opacity: 0.25; transform: translate3d(0, 18px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.rise {
+  animation: rise 900ms var(--ease-out-quint) both;
+  animation-delay: calc(var(--i, 0) * 110ms);
+}
+@media (prefers-reduced-motion: reduce) { .rise { animation: none; } }
+.reduced .rise { animation: none; }
+/* Le masque des lignes (SplitText) doit laisser passer les descendantes */
+.split-line-mask { padding-bottom: 0.16em; margin-bottom: -0.16em; }
+
+/* ------------------------------------------------------------------
+   Composants : micro-interactions
+   ------------------------------------------------------------------ */
+@layer components {
+  /* Cartes en arche : léger soulèvement au survol */
+  .lift { transition: transform 500ms var(--ease-out-quint), box-shadow 500ms var(--ease-out-quint); }
+  .lift:hover { transform: translateY(-4px); box-shadow: 0 1px 2px rgb(27 27 27 / 0.04), 0 24px 48px -16px rgb(27 27 27 / 0.14); }
+
+  /* Lignes de liste : l'étoile pivote au survol */
+  .row-star { transition: transform 450ms var(--ease-out-quint); }
+  li:hover > .row-star, li:hover .row-star { transform: rotate(90deg); }
+
+  /* Parallaxe : le média est légèrement agrandi pour ne jamais laisser de bord vide */
+  [data-parallax] > [data-parallax-inner] { scale: 1.18; will-change: transform; }
+  @media (max-width: 1023px) { [data-parallax] > [data-parallax-inner] { scale: 1; will-change: auto; } }
+  .reduced [data-parallax] > [data-parallax-inner] { scale: 1; }
+
+  /* Parcours : sur desktop le rail est piloté par GSAP ; si mouvement réduit, il redevient défilable */
+  .path-track { scrollbar-width: none; }
+  .path-track::-webkit-scrollbar { display: none; }
+  .reduced .path-track { overflow-x: auto; }
+}
+
+/* ------------------------------------------------------------------
+   Tonalités de fond : le rose profond et l'italique rose accent ne passent pas
+   le contraste AA sur rose pâle ni sur les hero teintés. Ces règles les
+   remplacent automatiquement selon le fond (data-tone sur la section).
+   ------------------------------------------------------------------ */
+[data-tone="rose"] .text-rose-deep { color: var(--color-ink); }
+[data-tone="rose"] .link-line { color: var(--color-ink); }
+[data-tone="rose"] h1 em, [data-tone="rose"] h2 em, [data-tone="rose"] .display em, [data-tone="rose"] .h2 em { color: var(--color-ink); }
+[data-tone="tint"] .link-line { color: var(--color-ink); }
+[data-tone="tint"] h1 em, [data-tone="tint"] h2 em, [data-tone="tint"] .display em, [data-tone="tint"] .title em, [data-tone="tint"] .h2 em { color: var(--color-rose-deep); }
+
+/* Vidéo de fond : bouton pause discret (WCAG 2.2.2) */
+.media-pause {
+  position: absolute; right: 0.75rem; bottom: 0.75rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.75rem; height: 2.75rem; border-radius: 999px;
+  background-color: color-mix(in oklab, var(--color-cream) 88%, transparent);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-soft);
+  opacity: 0.85;
+  transition: opacity 200ms, transform 300ms var(--ease-out-quint);
+  cursor: pointer;
+}
+.media-pause:hover, .media-pause:focus-visible { opacity: 1; transform: scale(1.04); }

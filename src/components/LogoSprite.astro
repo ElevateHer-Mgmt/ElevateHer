@@ -1,0 +1,20 @@
+---
+/**
+ * Sprite du logo vectoriel, inséré une seule fois par page (caché).
+ * Les remplissages deviennent des variables CSS : --logo-ink et --logo-rose,
+ * ce qui permet par exemple un logo tout en crème sur fond encre.
+ */
+import raw from '../assets/elevate-her-wordmark.min.svg?raw';
+import { logoViewBox } from '../lib/logo';
+
+const symbol = raw
+  .replace(/<\?xml[^>]*>/, '')
+  .replace(/<svg[^>]*>/, `<symbol id="eh-wordmark" viewBox="${logoViewBox}">`)
+  .replace('</svg>', '</symbol>')
+  .replace(/<title>[^<]*<\/title>/, '')
+  .replace(/fill="#1b1b1b"/gi, 'fill="var(--logo-ink, #1B1B1B)"')
+  .replace(/fill="#d9a3a5"/gi, 'fill="var(--logo-rose, #D9A3A5)"');
+---
+<svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs set:html={symbol} />
+</svg>

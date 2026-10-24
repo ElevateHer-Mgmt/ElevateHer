@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Arcs from '../components/Arcs.astro';
+import Star from '../components/Star.astro';
+import { notFound as n } from '../data/legal';
+import { accent } from '../lib/accent';
+---
+<Base title={n.meta.title} description={n.meta.description} noindex>
+  <Header />
+  <main id="main">
+    <section class="relative flex min-h-[90svh] items-center overflow-hidden bg-rose-pale/35 pb-20 pt-40" data-tone="tint">
+      <Arcs size="md" />
+      <div class="container-page relative text-center">
+        <p class="label-sm inline-flex items-center gap-3 rounded-pill bg-white/70 px-5 py-2.5 text-rose-deep ring-1 ring-rose/50 rise" style="--i:0"><Star class="h-2 w-2 text-rose" />{n.eyebrow}<Star class="h-2 w-2 text-rose" /></p>
+        <h1 class="rise title mx-auto mt-6 max-w-3xl" style="--i:1" set:html={accent(n.title)}></h1>
+        <p class="lead mx-auto mt-6 max-w-xl text-taupe rise" style="--i:2">{n.text}</p>
+        <div class="rise mt-10 flex flex-wrap items-center justify-center gap-6" style="--i:3">
+          <a href={n.links[0].href} class="btn btn-outline">{n.links[0].label}</a>
+          <a href={n.links[1].href} class="btn btn-ink">{n.links[1].label}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import { initPage } from '../scripts/page';
+  initPage();
+</script>

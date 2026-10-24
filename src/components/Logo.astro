@@ -1,0 +1,16 @@
+---
+/** Logo « Elevate / Her ». Couleurs pilotées par --logo-ink et --logo-rose. */
+import { logoOuterViewBox } from '../lib/logo';
+interface Props { class?: string; label?: string; decorative?: boolean }
+const { class: cls = 'h-10', label = 'Elevate Her', decorative = false } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox={logoOuterViewBox}
+  role={decorative ? undefined : 'img'}
+  aria-label={decorative ? undefined : label}
+  aria-hidden={decorative ? 'true' : undefined}
+  focusable="false"
+>
+  <use href="#eh-wordmark"></use>
+</svg>

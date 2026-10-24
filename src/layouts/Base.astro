@@ -1,0 +1,84 @@
+---
+/**
+ * Gabarit de base : <head> complet, polices préchargées, sprite du logo.
+ * Le header et le footer sont fournis par chaque page (ils diffèrent selon la direction).
+ */
+import '../styles/global.css';
+import LogoSprite from '../components/LogoSprite.astro';
+import { org } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  bodyClass?: string;
+  /** Données structurées propres à la page (ex. FAQPage), ajoutées au graphe Organization + WebSite. */
+  schema?: Record<string, unknown>[];
+}
+const { title, description, noindex = false, bodyClass = '', schema = [] } = Astro.props;
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? '';
+const canonical = new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '') || siteUrl;
+const ogImage = `${siteUrl}/og-image.jpg`;
+const graph = [
+  {
+    '@type': 'Organization',
+    '@id': `${siteUrl}/#organization`,
+    name: org.name,
+    url: siteUrl,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/icon-512.png`, width: 512, height: 512 },
+    description: org.description,
+    ...(org.sameAs.length ? { sameAs: org.sameAs } : {}),
+  },
+  {
+    '@type': 'WebSite',
+    '@id': `${siteUrl}/#website`,
+    url: siteUrl,
+    name: org.name,
+    description: org.description,
+    inLanguage: 'en',
+    publisher: { '@id': `${siteUrl}/#organization` },
+  },
+  ...schema,
+];
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#FFF8F0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Elevate Her" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${org.name} — ${org.tagline}`} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={jsonLd}></script>
+    <link rel="preload" href="/fonts/playfair-opsz.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jost-wght.woff2" as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
+    <script is:inline>document.documentElement.classList.add("js");if(matchMedia("(prefers-reduced-motion: reduce)").matches||location.search.includes("nomotion"))document.documentElement.classList.add("reduced");</script>
+  </head>
+  <body class:list={['min-h-dvh bg-cream text-ink', bodyClass]}>
+    <LogoSprite />
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 btn btn-ink">Skip to content</a>
+    <slot />
+  </body>
+</html>
