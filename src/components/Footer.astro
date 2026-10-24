@@ -2,6 +2,7 @@
 /** Footer crème, bandeau slogan rose pâle en écho à la bannière de la marque. */
 import Logo from './Logo.astro';
 import Star from './Star.astro';
+import Link from './Link.astro';
 import { footer } from '../data/site';
 ---
 <footer class="border-t border-rose/50">
@@ -17,13 +18,7 @@ import { footer } from '../data/site';
           <ul class="mt-4 space-y-1">
             {col.links.map((l) => (
               <li>
-                <a
-                  href={l.href}
-                  class="inline-flex min-h-11 items-center font-display text-lg text-ink transition-colors duration-200 hover:text-rose-deep"
-                  {...(l.external ? { target: '_blank', rel: 'noopener' } : {})}
-                >
-                  {l.label}{l.external && <span class="sr-only"> (opens in a new tab)</span>}
-                </a>
+                <Link href={l.href} class="inline-flex min-h-11 items-center font-display text-lg text-ink transition-colors duration-200 hover:text-rose-deep">{l.label}</Link>
               </li>
             ))}
           </ul>

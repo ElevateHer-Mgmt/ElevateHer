@@ -8,6 +8,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { withBase } from '../lib/url';
 
 interface Props {
   name: string;
@@ -25,12 +26,12 @@ const root = path.resolve('public/medias');
 const exists = (p: string) => fs.existsSync(path.join(root, p));
 
 let img: string | null = null;
-if (exists(`images/${name}.webp`)) img = `/medias/images/${name}.webp`;
-else if (exists(`images/${name}.jpg`)) img = `/medias/images/${name}.jpg`;
+if (exists(`images/${name}.webp`)) img = withBase(`/medias/images/${name}.webp`);
+else if (exists(`images/${name}.jpg`)) img = withBase(`/medias/images/${name}.jpg`);
 
-const mp4 = exists(`videos/${name}.mp4`) ? `/medias/videos/${name}.mp4` : null;
-const webm = exists(`videos/${name}.webm`) ? `/medias/videos/${name}.webm` : null;
-const poster = exists(`videos/${name}-poster.webp`) ? `/medias/videos/${name}-poster.webp` : null;
+const mp4 = exists(`videos/${name}.mp4`) ? withBase(`/medias/videos/${name}.mp4`) : null;
+const webm = exists(`videos/${name}.webm`) ? withBase(`/medias/videos/${name}.webm`) : null;
+const poster = exists(`videos/${name}-poster.webp`) ? withBase(`/medias/videos/${name}-poster.webp`) : null;
 const hasVideo = kind === 'video' && mp4;
 const hasImage = kind === 'image' && img;
 const placeholder = !hasVideo && !hasImage && !poster;

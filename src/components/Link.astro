@@ -1,0 +1,11 @@
+---
+/**
+ * Lien unique du site. Interne : ajoute le chemin de base (GitHub Pages).
+ * Externe (formulaire Google, Instagram…) : nouvel onglet, avec mention pour les lecteurs d'écran.
+ */
+import { withBase, isExternal } from '../lib/url';
+interface Props { href: string; class?: string; [attr: string]: unknown }
+const { href, ...rest } = Astro.props;
+const external = isExternal(href);
+---
+<a href={external ? href : withBase(href)} {...rest} {...(external ? { target: '_blank', rel: 'noopener' } : {})}><slot />{external && <span class="sr-only"> (opens in a new tab)</span>}</a>

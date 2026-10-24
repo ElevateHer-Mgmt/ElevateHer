@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import ApplyCta from '../components/ApplyCta.astro';
 import Star from '../components/Star.astro';
+import Link from '../components/Link.astro';
 import { contact as c } from '../data/contact';
 ---
 <Base title={c.meta.title} description={c.meta.description}>
@@ -19,13 +20,13 @@ import { contact as c } from '../data/contact';
           <Star class="mx-auto h-3 w-3 text-rose" />
           <h2 class="h3 mt-8">{c.doors.creators.title}</h2>
           <p class="mt-4 text-taupe">{c.doors.creators.text}</p>
-          <a href={c.doors.creators.button.href} class="btn btn-ink mt-8">{c.doors.creators.button.label}</a>
+          <Link href={c.doors.creators.button.href} class="btn btn-ink mt-8">{c.doors.creators.button.label}</Link>
         </div>
         <div class="lift rounded-t-full bg-rose-pale px-8 pb-10 pt-20 text-center" data-reveal-item data-tone="rose">
           <Star class="mx-auto h-3 w-3 text-rose-deep" />
           <h2 class="h3 mt-8">{c.doors.brands.title}</h2>
           <p class="mt-4 text-ink/75">{c.doors.brands.text}</p>
-          <a href={c.doors.brands.button.href} class="btn btn-outline mt-8">{c.doors.brands.button.label}</a>
+          <Link href={c.doors.brands.button.href} class="btn btn-outline mt-8">{c.doors.brands.button.label}</Link>
         </div>
       </div>
 
@@ -37,9 +38,7 @@ import { contact as c } from '../data/contact';
             <div class="py-4">
               <dt class="label-sm text-taupe">{d.label}</dt>
               <dd class="mt-1 font-display text-lg">
-                {d.href ? (
-                  <a href={d.href} target="_blank" rel="noopener" class="link-line">{d.value}<span class="sr-only"> (opens in a new tab)</span></a>
-                ) : d.value}
+                {d.href ? <Link href={d.href} class="link-line">{d.value}</Link> : d.value}
               </dd>
             </div>
           ))}

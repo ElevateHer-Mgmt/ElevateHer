@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Arcs from '../components/Arcs.astro';
 import Star from '../components/Star.astro';
+import Link from '../components/Link.astro';
 import { notFound as n } from '../data/legal';
 import { accent } from '../lib/accent';
 ---
@@ -17,8 +18,8 @@ import { accent } from '../lib/accent';
         <h1 class="rise title mx-auto mt-6 max-w-3xl" style="--i:1" set:html={accent(n.title)}></h1>
         <p class="lead mx-auto mt-6 max-w-xl text-taupe rise" style="--i:2">{n.text}</p>
         <div class="rise mt-10 flex flex-wrap items-center justify-center gap-6" style="--i:3">
-          <a href={n.links[0].href} class="btn btn-outline">{n.links[0].label}</a>
-          <a href={n.links[1].href} class="btn btn-ink">{n.links[1].label}</a>
+          <Link href={n.links[0].href} class="btn btn-outline">{n.links[0].label}</Link>
+          <Link href={n.links[1].href} class="btn btn-ink">{n.links[1].label}</Link>
         </div>
       </div>
     </section>

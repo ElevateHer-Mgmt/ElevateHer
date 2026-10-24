@@ -6,6 +6,9 @@
 import '../styles/global.css';
 import LogoSprite from '../components/LogoSprite.astro';
 import { org } from '../data/site';
+import { base, withBase } from '../lib/url';
+import playfairUrl from '../assets/fonts/playfair-opsz.woff2?url';
+import jostUrl from '../assets/fonts/jost-wght.woff2?url';
 
 interface Props {
   title: string;
@@ -16,27 +19,36 @@ interface Props {
   schema?: Record<string, unknown>[];
 }
 const { title, description, noindex = false, bodyClass = '', schema = [] } = Astro.props;
-const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? '';
-const canonical = new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '') || siteUrl;
-const ogImage = `${siteUrl}/og-image.jpg`;
+const origin = Astro.site?.origin ?? '';
+/** Accueil absolu, avec barre finale (…/ElevateHer/), servi sans redirection. */
+const home = `${origin}${withBase('/')}`;
+/**
+ * Adresse canonique : le chemin de la page sans le chemin de base ni l'extension .html
+ * (build.format 'file' la fait apparaître dans Astro.url), réassemblé proprement.
+ */
+let rel = Astro.url.pathname.replace(/\/$/, '').replace(/\.html$/, '');
+if (base && rel.startsWith(base)) rel = rel.slice(base.length);
+if (rel === '/index') rel = '';
+const canonical = rel ? `${origin}${base}${rel}` : home;
+const ogImage = `${origin}${withBase('/og-image.jpg')}`;
 const graph = [
   {
     '@type': 'Organization',
-    '@id': `${siteUrl}/#organization`,
+    '@id': `${home}#organization`,
     name: org.name,
-    url: siteUrl,
-    logo: { '@type': 'ImageObject', url: `${siteUrl}/icon-512.png`, width: 512, height: 512 },
+    url: home,
+    logo: { '@type': 'ImageObject', url: `${origin}${withBase('/icon-512.png')}`, width: 512, height: 512 },
     description: org.description,
     ...(org.sameAs.length ? { sameAs: org.sameAs } : {}),
   },
   {
     '@type': 'WebSite',
-    '@id': `${siteUrl}/#website`,
-    url: siteUrl,
+    '@id': `${home}#website`,
+    url: home,
     name: org.name,
     description: org.description,
     inLanguage: 'en',
-    publisher: { '@id': `${siteUrl}/#organization` },
+    publisher: { '@id': `${home}#organization` },
   },
   ...schema,
 ];
@@ -66,13 +78,13 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" href={withBase('/favicon.ico')} sizes="32x32" />
+    <link rel="icon" href={withBase('/icon-192.png')} type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
+    <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
     <script type="application/ld+json" set:html={jsonLd}></script>
-    <link rel="preload" href="/fonts/playfair-opsz.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/jost-wght.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={playfairUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={jostUrl} as="font" type="font/woff2" crossorigin />
     <slot name="head" />
     <script is:inline>document.documentElement.classList.add("js");if(matchMedia("(prefers-reduced-motion: reduce)").matches||location.search.includes("nomotion"))document.documentElement.classList.add("reduced");</script>
   </head>

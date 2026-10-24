@@ -2,6 +2,7 @@
 /** Bloc de fin de page partagé : rose pâle, arcs, titre, bénéfices, bouton. */
 import Arcs from './Arcs.astro';
 import Star from './Star.astro';
+import Link from './Link.astro';
 import { applyCta } from '../data/site';
 import { accent } from '../lib/accent';
 interface Props { compact?: boolean }
@@ -17,7 +18,7 @@ const { compact = false } = Astro.props;
       {applyCta.benefits.map((b) => (<li class="label-sm rounded-pill bg-white/70 px-4 py-2 ring-1 ring-rose">{b}</li>))}
     </ul>
     <div class="mt-12" data-reveal>
-      <a href={applyCta.button.href} class="btn btn-ink">{applyCta.button.label}</a>
+      <Link href={applyCta.button.href} class="btn btn-ink">{applyCta.button.label}</Link>
       <p class="mx-auto mt-5 text-small text-ink/70">{applyCta.note}</p>
     </div>
   </div>

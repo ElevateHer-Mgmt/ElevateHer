@@ -32,7 +32,8 @@ export const nav = {
   cta: { label: 'Apply to Elevate Her', short: 'Apply', href: applyUrl },
 };
 
-export type FooterLink = { label: string; href: string; /** Ouvre dans un nouvel onglet (site externe). */ external?: boolean };
+/** Chemins internes sans chemin de base ('/about') : le composant Link l'ajoute, et ouvre les liens externes dans un nouvel onglet. */
+export type FooterLink = { label: string; href: string };
 
 export const footer = {
   description: 'The team behind ambitious women building influential brands and valuable businesses.',
@@ -49,7 +50,7 @@ export const footer = {
     },
     {
       title: 'Connect',
-      links: [{ label: 'Instagram', href: instagramUrl, external: true }] as FooterLink[],
+      links: [{ label: 'Instagram', href: instagramUrl }] as FooterLink[],
     },
     {
       title: 'Legal',

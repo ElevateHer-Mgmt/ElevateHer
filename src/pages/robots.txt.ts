@@ -1,8 +1,9 @@
 import type { APIRoute } from 'astro';
+import { withBase } from '../lib/url';
 
-/** robots.txt généré à partir du domaine déclaré dans astro.config (site). */
+/** robots.txt généré à partir du domaine (site) et du chemin de base déclarés dans astro.config. */
 export const GET: APIRoute = ({ site }) => {
-  const base = site?.href.replace(/\/$/, '') ?? '';
-  const body = ['User-agent: *', 'Allow: /', '', `Sitemap: ${base}/sitemap-index.xml`, ''].join('\n');
+  const origin = site?.origin ?? '';
+  const body = ['User-agent: *', 'Allow: /', '', `Sitemap: ${origin}${withBase('/sitemap-index.xml')}`, ''].join('\n');
   return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

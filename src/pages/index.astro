@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Link from '../components/Link.astro';
 import ApplyCta from '../components/ApplyCta.astro';
 import Arcs from '../components/Arcs.astro';
 import Marquee from '../components/Marquee.astro';
@@ -35,8 +36,8 @@ const gutter = 'clamp(1rem, 0.5rem + 2.5vw, 3.5rem)';
         <h1 class="rise h2 mx-auto mt-10 max-w-3xl" style="--i:2" set:html={accent(h.hero.title)}></h1>
         <p class="rise lead mx-auto mt-6 max-w-2xl text-taupe" style="--i:3">{h.hero.text}</p>
         <div class="rise mt-10 flex flex-wrap items-center justify-center gap-6" style="--i:4">
-          <a href={h.hero.cta.href} class="btn btn-ink">{h.hero.cta.label}</a>
-          <a href={h.hero.secondary.href} class="link-line">{h.hero.secondary.label}</a>
+          <Link href={h.hero.cta.href} class="btn btn-ink">{h.hero.cta.label}</Link>
+          <Link href={h.hero.secondary.href} class="link-line">{h.hero.secondary.label}</Link>
         </div>
         <p class="rise label-sm mt-8 text-taupe" style="--i:5">{h.hero.note.join(' · ')}</p>
       </div>
@@ -117,7 +118,7 @@ const gutter = 'clamp(1rem, 0.5rem + 2.5vw, 3.5rem)';
             <div class="shrink-0" style={`width:${gutter}`} aria-hidden="true"></div>
           </div>
         </div>
-        <p class="container-page mt-4"><a href={h.path.outro.href} class="link-line">{h.path.outro.label}</a></p>
+        <p class="container-page mt-4"><Link href={h.path.outro.href} class="link-line">{h.path.outro.label}</Link></p>
       </div>
     </section>
 
@@ -152,7 +153,7 @@ const gutter = 'clamp(1rem, 0.5rem + 2.5vw, 3.5rem)';
           ))}
         </ul>
       </div>
-      <p class="mt-10 text-center" data-reveal><a href={h.receive.link.href} class="link-line">{h.receive.link.label}</a></p>
+      <p class="mt-10 text-center" data-reveal><Link href={h.receive.link.href} class="link-line">{h.receive.link.label}</Link></p>
     </section>
 
     <!-- 6. ELLE RESTE LE VISAGE -->
@@ -248,7 +249,7 @@ const gutter = 'clamp(1rem, 0.5rem + 2.5vw, 3.5rem)';
           </li>
         ))}
       </ol>
-      <p class="mt-14 text-center" data-reveal><a href={h.apply.link.href} class="btn btn-outline">{h.apply.link.label}</a></p>
+      <p class="mt-14 text-center" data-reveal><Link href={h.apply.link.href} class="btn btn-outline">{h.apply.link.label}</Link></p>
     </section>
 
     <ApplyCta />
