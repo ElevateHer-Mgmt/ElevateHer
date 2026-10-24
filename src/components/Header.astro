@@ -1,9 +1,9 @@
 ---
-/** Header : menu flottant en pilule, détaché du bord. Bouton Apply toujours visible. */
+/** Header : menu flottant en pilule, détaché du bord. Bouton Apply toujours visible. Sur téléphone, menu en volet latéral animé. */
 import Logo from './Logo.astro';
 import Star from './Star.astro';
 import Link from './Link.astro';
-import { nav } from '../data/site';
+import { nav, instagramUrl } from '../data/site';
 import { withBase } from '../lib/url';
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) => href !== '/' && current.startsWith(withBase(href));
@@ -24,18 +24,24 @@ const isActive = (href: string) => href !== '/' && current.startsWith(withBase(h
       </button>
     </div>
   </div>
-  <div id="menu" data-menu hidden data-tone="rose" class="fixed inset-0 z-50 flex flex-col bg-rose-pale">
-    <div class="flex items-center justify-between px-6 pt-6">
-      <Logo class="h-8" decorative />
-      <button type="button" class="flex h-11 w-11 items-center justify-center rounded-full bg-white/70 ring-1 ring-rose/50" data-menu-close aria-label="Close menu">
-        <span class="relative block h-5 w-5" aria-hidden="true"><span class="absolute left-0 top-1/2 h-px w-5 rotate-45 bg-ink"></span><span class="absolute left-0 top-1/2 h-px w-5 -rotate-45 bg-ink"></span></span>
-      </button>
+  <div id="menu" data-menu hidden class="fixed inset-0 z-50 md:hidden">
+    <div class="menu-backdrop absolute inset-0 bg-ink/35" data-menu-close aria-hidden="true"></div>
+    <div class="menu-panel absolute inset-y-0 right-0 flex w-[min(86vw,22rem)] flex-col rounded-l-[2rem] bg-rose-pale shadow-soft" data-tone="rose" role="dialog" aria-modal="true" aria-label="Menu">
+      <div class="flex items-center justify-between px-6 pt-6">
+        <Logo class="h-7" decorative />
+        <button type="button" class="flex h-11 w-11 items-center justify-center rounded-full bg-white/70 ring-1 ring-rose/50" data-menu-close aria-label="Close menu">
+          <span class="relative block h-5 w-5" aria-hidden="true"><span class="absolute left-0 top-1/2 h-px w-5 rotate-45 bg-ink"></span><span class="absolute left-0 top-1/2 h-px w-5 -rotate-45 bg-ink"></span></span>
+        </button>
+      </div>
+      <nav class="flex flex-1 flex-col justify-center px-8" aria-label="Mobile">
+        {nav.links.map((l, i) => (
+          <Link href={l.href} class="menu-item flex min-h-14 items-center justify-between border-b border-ink/10 font-display text-3xl" style={`--i:${i}`} data-menu-link aria-current={isActive(l.href) ? 'page' : undefined}>{l.label}<Star class="h-2.5 w-2.5 text-rose-deep" /></Link>
+        ))}
+        <Link href={nav.cta.href} class="menu-item btn btn-ink mt-8 w-full" style={`--i:${nav.links.length}`} data-menu-link>{nav.cta.label}</Link>
+        <Link href={instagramUrl} class="menu-item label-sm mt-6 inline-flex min-h-11 items-center gap-2 self-start text-ink" style={`--i:${nav.links.length + 1}`} data-menu-link>Instagram</Link>
+      </nav>
+      <p class="label-sm flex items-center gap-3 px-8 pb-10 text-ink/70"><Star class="h-2.5 w-2.5 text-rose-deep" />By application only</p>
     </div>
-    <nav class="flex flex-1 flex-col items-center justify-center gap-6 text-center" aria-label="Mobile">
-      {nav.links.map((l) => (<Link href={l.href} class="font-display text-5xl" data-menu-link aria-current={isActive(l.href) ? 'page' : undefined}>{l.label}</Link>))}
-      <Link href={nav.cta.href} class="btn btn-ink mt-6" data-menu-link>{nav.cta.label}</Link>
-    </nav>
-    <p class="label-sm flex items-center justify-center gap-3 pb-10 text-ink/70"><Star class="h-2.5 w-2.5 text-rose-deep" />By application only<Star class="h-2.5 w-2.5 text-rose-deep" /></p>
   </div>
 </header>
 <style>

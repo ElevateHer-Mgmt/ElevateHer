@@ -22,7 +22,7 @@ export const contact = {
     eyebrow: 'Find us',
     items: [
       { label: 'Instagram', value: '@serigne.sd', href: instagramUrl },
-      { label: 'Based in', value: '[TO COMPLETE : ville ou zone]' },
+      { label: 'Based in', value: 'Paris' },
     ] as { label: string; value: string; href?: string }[],
   },
 };

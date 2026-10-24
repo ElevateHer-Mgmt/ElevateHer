@@ -9,15 +9,6 @@ export const services = {
     title: 'Everything behind *her* brand.',
     text: 'Not a menu of services. One structure, built in five steps, with protection underneath. Every creator on the roster receives all of it.',
   },
-  anchors: [
-    { label: 'Brand', href: '#brand' },
-    { label: 'Audience', href: '#audience' },
-    { label: 'Growth', href: '#growth' },
-    { label: 'Revenue', href: '#revenue' },
-    { label: 'Opportunities', href: '#opportunities' },
-    { label: 'Protection', href: '#protection' },
-    { label: 'How we work', href: '#how-we-work' },
-  ],
   chapters: [
     {
       id: 'brand', n: '01', name: 'Brand', title: 'Start with who you *are*.', media: 'path-brand', alt: 'A creator in profile, cream silk blouse, against a plain cream wall.',
@@ -108,6 +99,5 @@ export const services = {
       'You care how your brand is seen, and you want it protected.',
     ],
     closing: 'We look at the whole picture: your brand, your consistency, your ambition and where you want to go.',
-    todo: "[TO COMPLETE : critère d'audience minimum, si Ethan en a un]",
   },
 };

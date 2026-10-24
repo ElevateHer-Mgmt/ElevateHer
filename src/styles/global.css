@@ -318,6 +318,19 @@
 }
 
 /* ------------------------------------------------------------------
+   Menu mobile : volet latéral qui glisse depuis la droite, fond assombri,
+   liens en cascade. Hors couche pour primer sur la transition du bouton (.btn).
+   ------------------------------------------------------------------ */
+.menu-backdrop { opacity: 0; transition: opacity 400ms var(--ease-out-quint); }
+.menu-panel { transform: translate3d(100%, 0, 0); transition: transform 520ms var(--ease-out-quint); will-change: transform; }
+.menu-item { opacity: 0; transform: translate3d(1.5rem, 0, 0); transition: opacity 400ms var(--ease-out-quint), transform 500ms var(--ease-out-quint); transition-delay: calc(120ms + var(--i, 0) * 45ms); }
+[data-menu][data-open] .menu-backdrop { opacity: 1; }
+[data-menu][data-open] .menu-panel { transform: translate3d(0, 0, 0); }
+[data-menu][data-open] .menu-item { opacity: 1; transform: translate3d(0, 0, 0); }
+@media (prefers-reduced-motion: reduce) { .menu-backdrop, .menu-panel, .menu-item { transition: none; } }
+.reduced .menu-backdrop, .reduced .menu-panel, .reduced .menu-item { transition: none; }
+
+/* ------------------------------------------------------------------
    Tonalités de fond : le rose profond et l'italique rose accent ne passent pas
    le contraste AA sur rose pâle ni sur les hero teintés. Ces règles les
    remplacent automatiquement selon le fond (data-tone sur la section).
