@@ -9,6 +9,8 @@ export const home = {
     eyebrow: 'Creator Growth Agency & Private Club',
     title: 'Elevate your brand. Expand your *income*.',
     text: 'A selective creator agency backed by a dedicated team helping ambitious women build stronger brands, bigger audiences and more valuable businesses.',
+    /** Version courte affichée sur téléphone à la place de `text`. */
+    short: 'A selective creator agency, backed by a dedicated team.',
     cta: { label: 'Apply to Elevate Her', href: applyUrl },
     secondary: { label: 'Discover the path', href: '#path' },
     note: ['By application only', 'Limited roster'],

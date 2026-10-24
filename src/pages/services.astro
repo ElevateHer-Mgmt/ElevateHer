@@ -38,7 +38,7 @@ import { accent } from '../lib/accent';
             <p class="font-display text-6xl font-light leading-none text-ink md:text-7xl" data-reveal>{c.n}</p>
             <p class="label mt-4 text-rose-deep" data-reveal>{c.name}</p>
             <h2 class="h2 mt-5" data-split set:html={accent(c.title)}></h2>
-            {c.paragraphs.map((p) => (<p class="mt-5 text-taupe md:mt-6" data-reveal>{p}</p>))}
+            {c.paragraphs.map((p) => (<p class="mt-5 text-taupe max-md:hidden md:mt-6" data-reveal>{p}</p>))}
             <p class="label-sm mt-8 text-taupe md:mt-10" data-reveal>Included</p>
             <ul class="mt-4 divide-y divide-rose/50 border-y border-rose/50" data-reveal-group>
               {c.included.map((inc) => (
@@ -46,7 +46,7 @@ import { accent } from '../lib/accent';
                   <Star class="row-star mt-2 h-2.5 w-2.5 shrink-0 text-rose" />
                   <div>
                     <h3 class="font-display text-xl">{inc.title}</h3>
-                    <p class="mt-1 text-small text-taupe md:text-body">{inc.text}</p>
+                    <p class="mt-1 text-small text-taupe max-md:hidden md:text-body">{inc.text}</p>
                   </div>
                 </li>
               ))}
@@ -65,12 +65,12 @@ import { accent } from '../lib/accent';
           <p class="font-display text-6xl font-light leading-none text-ink md:text-7xl">{s.protection.n}</p>
           <p class="label mt-4 text-rose-deep">{s.protection.name}</p>
           <h2 class="h2 mt-5" set:html={accent(s.protection.title)}></h2>
-          <p class="mx-auto mt-5 text-ink/80">{s.protection.text}</p>
+          <p class="mx-auto mt-5 text-ink/80 max-md:hidden">{s.protection.text}</p>
           <ul class="mt-8 grid gap-5 text-left md:mt-10 md:gap-6 md:grid-cols-2">
             {s.protection.items.map((p) => (
               <li class="border-t border-ink/15 pt-4">
                 <h3 class="font-display text-xl">{p.title}</h3>
-                <p class="mt-2 text-ink/75">{p.text}</p>
+                <p class="mt-2 text-ink/75 max-md:hidden">{p.text}</p>
               </li>
             ))}
           </ul>
@@ -88,7 +88,7 @@ import { accent } from '../lib/accent';
           <h2 class="h2 mt-5" data-split set:html={accent(s.how.title)}></h2>
         </div>
         <div class="lg:col-span-6 lg:col-start-7">
-          {s.how.paragraphs.map((p) => (<p class="lead mt-6 text-taupe first:mt-0" data-reveal>{p}</p>))}
+          {s.how.paragraphs.map((p, j) => (<p class:list={['lead mt-6 text-taupe first:mt-0', j > 0 && 'max-md:hidden']} data-reveal>{p}</p>))}
           <p class="mt-8" data-reveal><Link href={s.how.link.href} class="link-line">{s.how.link.label}</Link></p>
         </div>
       </div>

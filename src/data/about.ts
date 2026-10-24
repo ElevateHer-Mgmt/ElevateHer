@@ -8,6 +8,8 @@ export const about = {
     eyebrow: 'About Elevate Her',
     title: 'The team behind *her*.',
     text: "Elevate Her is a selective creator agency with one idea at its centre: an ambitious woman shouldn't have to build her brand alone. A dedicated team works behind her, on her brand, her audience, her income and the opportunities that follow. She stays the face. The team stays behind it.",
+    /** Version courte affichée sur téléphone à la place de `text`. */
+    short: "An ambitious woman shouldn't have to build her brand alone. She stays the face. The team stays behind it.",
     media: 'about-hero',
     alt: 'A bright creative studio with cream walls, a creator seated at a desk.',
   },
@@ -15,6 +17,8 @@ export const about = {
     eyebrow: 'The name',
     title: 'What "Her" *means*.',
     text: "Her is who we build for. Ambitious female creators who want their personal brand to become a real business, with a team, a strategy and the structure that makes it last. That's the whole meaning of the name. It says who the work is for, nothing more.",
+    /** Version courte affichée sur téléphone à la place de `text`. */
+    short: 'Her is who we build for: ambitious female creators who want their personal brand to become a real business.',
   },
   club: {
     eyebrow: 'The club',

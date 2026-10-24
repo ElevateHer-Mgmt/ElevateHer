@@ -38,6 +38,13 @@ Le site n'héberge aucun formulaire. Tous les boutons « Apply to Elevate Her »
 
 Les textes vivent dans `src/data/` (un fichier par page). Modifier, enregistrer, puis `git add -A && git commit -m "…" && git push` : GitHub Pages reconstruit et publie tout seul. Les médias se déposent dans `public/medias/` selon `MEDIAS.md`, sans autre réglage.
 
+## Édition mobile condensée
+
+Sur téléphone (moins de 768 px), le site affiche une version allégée : mêmes sections essentielles, moins de texte. L'ordinateur garde tout. Deux mécanismes, à respecter quand tu modifies un texte :
+
+- Les champs `short` dans `src/data/` (`home.ts` → `hero.short`, `about.ts` → `hero.short` et `her.short`) remplacent le paragraphe complet sur téléphone. Si tu changes un texte long, pense à sa version courte.
+- Dans les pages, la classe `max-md:hidden` masque un élément sur téléphone (paragraphes d'explication, descriptions de listes, sections « She stays the face » et « Four steps » de l'accueil, bénéfices du bloc de fin) et `md:hidden` affiche un élément uniquement sur téléphone (la liste des trois idées de l'accueil). Les listes gardent leurs titres, les descriptions ne s'affichent que sur ordinateur.
+
 ## Polices
 
 Les trois fichiers de `src/assets/fonts/` sont des versions allégées des paquets `@fontsource-variable/playfair` et `@fontsource-variable/jost` : sous-ensemble latin (accents compris), axe optique de Playfair conservé, graisses limitées à 300–500 pour Playfair. Ils n'ont pas à être retouchés. Pour les régénérer un jour (par exemple après une mise à jour du paquet), avec Python et `fonttools` + `brotli` installés :

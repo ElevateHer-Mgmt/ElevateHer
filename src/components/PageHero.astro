@@ -3,8 +3,8 @@
 import Arcs from './Arcs.astro';
 import Star from './Star.astro';
 import { accent } from '../lib/accent';
-interface Props { eyebrow: string; title: string; text?: string; note?: string[]; class?: string }
-const { eyebrow, title, text, note, class: cls = '' } = Astro.props;
+interface Props { eyebrow: string; title: string; text?: string; /** Remplace `text` sur téléphone (édition mobile condensée). */ short?: string; note?: string[]; class?: string }
+const { eyebrow, title, text, short, note, class: cls = '' } = Astro.props;
 ---
 <section class:list={['relative overflow-hidden bg-rose-pale/35 pb-12 pt-32 md:pb-24 md:pt-48', cls]} data-tone="tint">
   <Arcs size="md" class="left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2" />
@@ -13,7 +13,8 @@ const { eyebrow, title, text, note, class: cls = '' } = Astro.props;
       <Star class="h-2 w-2 text-rose" />{eyebrow}<Star class="h-2 w-2 text-rose" />
     </p>
     <h1 class="rise title mx-auto mt-6 max-w-4xl md:mt-8" style="--i:1" set:html={accent(title)}></h1>
-    {text && <p class="rise lead mx-auto mt-6 max-w-2xl text-taupe" style="--i:2">{text}</p>}
+    {text && <p class:list={['rise lead mx-auto mt-6 max-w-2xl text-taupe', short && 'max-md:hidden']} style="--i:2">{text}</p>}
+    {short && <p class="rise lead mx-auto mt-6 max-w-2xl text-taupe md:hidden" style="--i:2">{short}</p>}
     {note && <p class="rise label-sm mt-8 text-taupe" style="--i:3">{note.join(' · ')}</p>}
     <slot />
   </div>
