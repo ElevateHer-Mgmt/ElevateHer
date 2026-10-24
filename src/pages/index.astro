@@ -95,16 +95,16 @@ const gutter = 'clamp(1rem, 0.5rem + 2.5vw, 3.5rem)';
           </div>
         </div>
         <div class="mt-10 h-px w-full bg-rose/50"><div class="h-px w-full origin-left scale-x-0 bg-ink" data-progress></div></div>
-        <div class="path-track mt-10 w-full snap-x snap-mandatory overflow-x-auto pb-6 focus-visible:outline-offset-[-4px] lg:snap-none lg:overflow-hidden" data-track tabindex="0" role="region" aria-label="The path, five steps">
-          <div class="flex w-max gap-6 lg:gap-12" style={`padding-inline:${gutter}`} data-rail>
+        <div class="path-track mt-10 w-full snap-x snap-mandatory overflow-x-auto pb-6 focus-visible:outline-offset-[-4px] lg:snap-none lg:overflow-hidden" style={`scroll-padding-inline:${gutter}`} data-track tabindex="0" role="region" aria-label="The path, five steps">
+          <div class="flex w-max gap-5 md:gap-8 lg:gap-12" style={`padding-inline:${gutter}`} data-rail>
             {h.path.steps.map((s) => (
-              <article class="w-[min(84vw,24rem)] shrink-0 snap-start lg:w-[min(46vw,38rem)]" data-panel>
+              <article class="w-[min(72vw,20rem)] shrink-0 snap-start md:w-[min(56vw,24rem)] lg:w-[min(46vw,38rem)]" data-panel>
                 <div class="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-8">
                   <div data-panel-media>
                     <Media name={s.media} ratio="4 / 5" class="rounded-t-full" alt={s.alt} />
                   </div>
                   <div>
-                    <p class="font-display text-7xl font-light leading-none text-ink">{s.n}</p>
+                    <p class="font-display text-6xl font-light leading-none text-ink md:text-7xl">{s.n}</p>
                     <p class="label mt-4 text-rose-deep">{s.name}</p>
                     <h3 class="h3 mt-4">{s.title}</h3>
                     <p class="mt-4 text-taupe">{s.text}</p>
