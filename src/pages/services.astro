@@ -29,24 +29,24 @@ import { accent } from '../lib/accent';
 
     <!-- Chapitres du parcours -->
     {s.chapters.map((c, i) => (
-      <section id={c.id} class="container-page scroll-mt-40 py-20 md:py-32" data-chapter={c.id}>
-        <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+      <section id={c.id} class="container-page scroll-mt-40 py-14 md:py-32" data-chapter={c.id}>
+        <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-16">
           <div class:list={['lg:col-span-5', i % 2 === 1 ? 'lg:order-last' : '']} data-reveal>
-            <Media name={c.media} ratio="4 / 5" class="mx-auto w-[min(100%,26rem)] rounded-t-full" parallax alt={c.alt} />
+            <Media name={c.media} ratio="4 / 5" class="mx-auto w-[min(64vw,26rem)] rounded-t-full" parallax alt={c.alt} />
           </div>
           <div class="lg:col-span-7">
-            <p class="font-display text-7xl font-light leading-none text-ink" data-reveal>{c.n}</p>
+            <p class="font-display text-6xl font-light leading-none text-ink md:text-7xl" data-reveal>{c.n}</p>
             <p class="label mt-4 text-rose-deep" data-reveal>{c.name}</p>
             <h2 class="h2 mt-5" data-split set:html={accent(c.title)}></h2>
-            {c.paragraphs.map((p) => (<p class="mt-6 text-taupe" data-reveal>{p}</p>))}
-            <p class="label-sm mt-10 text-taupe" data-reveal>Included</p>
+            {c.paragraphs.map((p) => (<p class="mt-5 text-taupe md:mt-6" data-reveal>{p}</p>))}
+            <p class="label-sm mt-8 text-taupe md:mt-10" data-reveal>Included</p>
             <ul class="mt-4 divide-y divide-rose/50 border-y border-rose/50" data-reveal-group>
               {c.included.map((inc) => (
                 <li class="flex gap-4 py-4" data-reveal-item>
                   <Star class="row-star mt-2 h-2.5 w-2.5 shrink-0 text-rose" />
                   <div>
                     <h3 class="font-display text-xl">{inc.title}</h3>
-                    <p class="mt-1 text-taupe">{inc.text}</p>
+                    <p class="mt-1 text-small text-taupe md:text-body">{inc.text}</p>
                   </div>
                 </li>
               ))}
@@ -58,15 +58,15 @@ import { accent } from '../lib/accent';
     ))}
 
     <!-- Protection -->
-    <section id="protection" class="container-page scroll-mt-40 py-20 md:py-32" data-chapter="protection">
-      <div class="relative mx-auto max-w-3xl overflow-hidden rounded-t-full bg-rose-pale px-8 pb-12 pt-24 text-center md:px-16" data-reveal data-tone="rose">
+    <section id="protection" class="container-page scroll-mt-40 py-14 md:py-32" data-chapter="protection">
+      <div class="relative mx-auto max-w-3xl overflow-hidden rounded-t-full bg-rose-pale px-6 pb-10 pt-16 text-center md:px-16 md:pb-12 md:pt-24" data-reveal data-tone="rose">
         <Arcs size="md" class="left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 scale-75" />
         <div class="relative">
-          <p class="font-display text-7xl font-light leading-none text-ink">{s.protection.n}</p>
+          <p class="font-display text-6xl font-light leading-none text-ink md:text-7xl">{s.protection.n}</p>
           <p class="label mt-4 text-rose-deep">{s.protection.name}</p>
           <h2 class="h2 mt-5" set:html={accent(s.protection.title)}></h2>
           <p class="mx-auto mt-5 text-ink/80">{s.protection.text}</p>
-          <ul class="mt-10 grid gap-6 text-left md:grid-cols-2">
+          <ul class="mt-8 grid gap-5 text-left md:mt-10 md:gap-6 md:grid-cols-2">
             {s.protection.items.map((p) => (
               <li class="border-t border-ink/15 pt-4">
                 <h3 class="font-display text-xl">{p.title}</h3>
@@ -74,16 +74,16 @@ import { accent } from '../lib/accent';
               </li>
             ))}
           </ul>
-          <p class="label mt-10 flex items-center justify-center gap-3 text-ink"><Star class="h-2.5 w-2.5 text-rose-deep" />{s.protection.closing}</p>
+          <p class="label mt-8 flex items-center justify-center gap-3 text-ink md:mt-10"><Star class="h-2.5 w-2.5 text-rose-deep" />{s.protection.closing}</p>
         </div>
       </div>
     </section>
 
     <!-- How we work -->
-    <section id="how-we-work" class="container-page scroll-mt-40 py-20 md:py-32" data-chapter="how-we-work">
-      <div class="grid gap-10 lg:grid-cols-12">
+    <section id="how-we-work" class="container-page scroll-mt-40 py-14 md:py-32" data-chapter="how-we-work">
+      <div class="grid gap-6 lg:grid-cols-12 lg:gap-10">
         <div class="lg:col-span-5">
-          <p class="font-display text-7xl font-light leading-none text-ink" data-reveal>{s.how.n}</p>
+          <p class="font-display text-6xl font-light leading-none text-ink md:text-7xl" data-reveal>{s.how.n}</p>
           <p class="label mt-4 text-rose-deep" data-reveal>{s.how.name}</p>
           <h2 class="h2 mt-5" data-split set:html={accent(s.how.title)}></h2>
         </div>
@@ -95,21 +95,21 @@ import { accent } from '../lib/accent';
     </section>
 
     <!-- Is Elevate Her for you? -->
-    <section class="container-page pb-24 pt-10 md:pb-36">
+    <section class="container-page pb-16 pt-6 md:pb-36 md:pt-10">
       <div class="mx-auto max-w-3xl text-center">
         <p class="label text-rose-deep" data-reveal>{s.fit.eyebrow}</p>
         <h2 class="h2 mt-6" data-split set:html={accent(s.fit.title)}></h2>
         <p class="lead mt-6 text-taupe" data-reveal>{s.fit.intro}</p>
       </div>
-      <ul class="mx-auto mt-12 max-w-2xl divide-y divide-rose/50 border-y border-rose/50" data-reveal-group>
+      <ul class="mx-auto mt-8 max-w-2xl divide-y divide-rose/50 border-y border-rose/50 md:mt-12" data-reveal-group>
         {s.fit.items.map((item) => (
-          <li class="flex items-start gap-4 py-5" data-reveal-item>
+          <li class="flex items-start gap-4 py-4 md:py-5" data-reveal-item>
             <Star class="row-star mt-2.5 h-2.5 w-2.5 shrink-0 text-rose-deep" />
             <p class="font-display text-xl">{item}</p>
           </li>
         ))}
       </ul>
-      <p class="mx-auto mt-10 max-w-2xl text-center text-taupe" data-reveal>{s.fit.closing} <span class="label-sm text-rose-deep">{s.fit.todo}</span></p>
+      <p class="mx-auto mt-8 max-w-2xl text-center text-taupe md:mt-10" data-reveal>{s.fit.closing} <span class="label-sm text-rose-deep">{s.fit.todo}</span></p>
     </section>
 
     <ApplyCta />

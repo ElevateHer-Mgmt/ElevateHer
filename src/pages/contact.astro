@@ -14,24 +14,24 @@ import { contact as c } from '../data/contact';
     <PageHero eyebrow={c.hero.eyebrow} title={c.hero.title} text={c.hero.text} />
 
     <!-- Deux portes, un seul formulaire (Google Forms) -->
-    <section class="container-page pb-24 pt-20 md:pb-36 md:pt-28">
-      <div class="mx-auto grid max-w-4xl gap-6 md:grid-cols-2" data-reveal-group>
-        <div class="lift rounded-t-full bg-white px-8 pb-10 pt-20 text-center shadow-soft" data-reveal-item>
+    <section class="container-page pb-16 pt-12 md:pb-36 md:pt-28">
+      <div class="mx-auto grid max-w-4xl gap-4 md:grid-cols-2 md:gap-6" data-reveal-group>
+        <div class="lift rounded-t-full bg-white px-6 pb-8 pt-14 text-center shadow-soft md:px-8 md:pb-10 md:pt-20" data-reveal-item>
           <Star class="mx-auto h-3 w-3 text-rose" />
-          <h2 class="h3 mt-8">{c.doors.creators.title}</h2>
+          <h2 class="h3 mt-6 md:mt-8">{c.doors.creators.title}</h2>
           <p class="mt-4 text-taupe">{c.doors.creators.text}</p>
-          <Link href={c.doors.creators.button.href} class="btn btn-ink mt-8">{c.doors.creators.button.label}</Link>
+          <Link href={c.doors.creators.button.href} class="btn btn-ink mt-6 md:mt-8">{c.doors.creators.button.label}</Link>
         </div>
-        <div class="lift rounded-t-full bg-rose-pale px-8 pb-10 pt-20 text-center" data-reveal-item data-tone="rose">
+        <div class="lift rounded-t-full bg-rose-pale px-6 pb-8 pt-14 text-center md:px-8 md:pb-10 md:pt-20" data-reveal-item data-tone="rose">
           <Star class="mx-auto h-3 w-3 text-rose-deep" />
-          <h2 class="h3 mt-8">{c.doors.brands.title}</h2>
+          <h2 class="h3 mt-6 md:mt-8">{c.doors.brands.title}</h2>
           <p class="mt-4 text-ink/75">{c.doors.brands.text}</p>
-          <Link href={c.doors.brands.button.href} class="btn btn-outline mt-8">{c.doors.brands.button.label}</Link>
+          <Link href={c.doors.brands.button.href} class="btn btn-outline mt-6 md:mt-8">{c.doors.brands.button.label}</Link>
         </div>
       </div>
 
       <!-- Coordonnées -->
-      <div class="mx-auto mt-20 max-w-md text-center md:mt-24" data-reveal>
+      <div class="mx-auto mt-14 max-w-md text-center md:mt-24" data-reveal>
         <p class="label text-rose-deep">{c.details.eyebrow}</p>
         <dl class="mt-6 divide-y divide-rose/50 border-y border-rose/50">
           {c.details.items.map((d) => (

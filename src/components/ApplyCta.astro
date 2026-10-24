@@ -8,16 +8,16 @@ import { accent } from '../lib/accent';
 interface Props { compact?: boolean }
 const { compact = false } = Astro.props;
 ---
-<section class:list={['relative overflow-hidden bg-rose-pale text-center', compact ? 'py-20 md:py-28' : 'py-28 md:py-44']} data-tone="rose">
+<section class:list={['relative overflow-hidden bg-rose-pale text-center', compact ? 'py-16 md:py-28' : 'py-20 md:py-44']} data-tone="rose">
   <Arcs size={compact ? 'md' : 'lg'} />
   <div class="container-page relative">
     <p class="label flex items-center justify-center gap-3 text-rose-deep" data-reveal><Star class="h-2.5 w-2.5 text-rose-deep" />{applyCta.eyebrow}</p>
-    <h2 class:list={['mx-auto mt-8 max-w-[13ch]', compact ? 'h2' : 'display']} data-split set:html={accent(applyCta.title)}></h2>
+    <h2 class:list={['mx-auto mt-6 max-w-[13ch] md:mt-8', compact ? 'h2' : 'display']} data-split set:html={accent(applyCta.title)}></h2>
     {!compact && <p class="lead mx-auto mt-8 max-w-xl text-ink/80" data-reveal>{applyCta.text}</p>}
-    <ul class="mt-10 flex flex-wrap justify-center gap-3" data-reveal>
+    <ul class="mt-8 flex flex-wrap justify-center gap-2.5 md:mt-10 md:gap-3" data-reveal>
       {applyCta.benefits.map((b) => (<li class="label-sm rounded-pill bg-white/70 px-4 py-2 ring-1 ring-rose">{b}</li>))}
     </ul>
-    <div class="mt-12" data-reveal>
+    <div class="mt-10 md:mt-12" data-reveal>
       <Link href={applyCta.button.href} class="btn btn-ink">{applyCta.button.label}</Link>
       <p class="mx-auto mt-5 text-small text-ink/70">{applyCta.note}</p>
     </div>
