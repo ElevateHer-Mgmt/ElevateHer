@@ -16,26 +16,19 @@ npm run preview
 
 ## Mise en ligne : GitHub Pages (en place)
 
-Le site est publié automatiquement par GitHub Pages à chaque `git push` sur la branche `main` du dépôt `ElevateHer-Mgmt/ElevateHer`, grâce au workflow `.github/workflows/deploy.yml` (workflow officiel Astro). Adresse publique : **https://elevateher-mgmt.github.io/ElevateHer/**
+Le site est publié automatiquement par GitHub Pages à chaque `git push` sur la branche `main` du dépôt `ElevateHer-Mgmt/ElevateHer`, grâce au workflow `.github/workflows/deploy.yml` (workflow officiel Astro). Adresse publique : **https://elevateher-management.com**
 
-- Réglage unique côté GitHub : Settings → Pages → Source « GitHub Actions » (déjà fait).
-- Suivi d'un déploiement : onglet « Actions » du dépôt. Un déploiement prend une à deux minutes.
-- Le workflow peut aussi être relancé à la main depuis cet onglet (« Run workflow »).
+- Réglages côté GitHub (déjà faits) : Settings → Pages → Source « GitHub Actions », et « Custom domain » = `elevateher-management.com`. Cocher « Enforce HTTPS » une fois le certificat émis par GitHub.
+- Le fichier `public/CNAME` (contenu : `elevateher-management.com`) est copié dans le site à chaque build : c'est lui qui garde le domaine attaché après chaque déploiement. Ne pas le supprimer.
+- Suivi d'un déploiement : onglet « Actions » du dépôt. Un déploiement prend une à deux minutes. Le workflow peut aussi être relancé à la main (« Run workflow »).
 
-### Chemin de base
+### Adresses
 
-Sur GitHub Pages, le site vit sous `/ElevateHer/` (le nom du dépôt). Deux lignes de `astro.config.mjs` s'en chargent : `site: 'https://elevateher-mgmt.github.io'` et `base: '/ElevateHer'`. Tous les liens internes, polices, icônes, médias, l'image de partage, le sitemap et le robots.txt reçoivent ce préfixe automatiquement : dans les fichiers de `src/data/`, les chemins restent écrits simplement (`/about`), c'est le composant `Link` qui ajoute le préfixe. Les adresses n'ont pas de barre finale (`…/ElevateHer/about`), d'où `build.format: 'file'` qui produit `about.html`, servi tel quel par GitHub Pages.
-
-### Passer à un vrai domaine (plus tard)
-
-1. Dans `astro.config.mjs` : `site: 'https://ton-domaine.com'` et supprimer la ligne `base`.
-2. Créer le fichier `public/CNAME` contenant uniquement le domaine (`ton-domaine.com`).
-3. Dans Settings → Pages du dépôt, renseigner le domaine (« Custom domain ») et suivre les indications DNS de GitHub. Cocher « Enforce HTTPS » une fois le certificat émis.
-4. Pousser : les liens internes suivent automatiquement, rien d'autre à changer.
+Le site est à la racine du domaine : `site: 'https://elevateher-management.com'` dans `astro.config.mjs`, sans `base`. Les adresses n'ont pas de barre finale (`…/about`), d'où `build.format: 'file'` qui produit `about.html`, servi tel quel par GitHub Pages. Les chemins internes sont écrits simplement (`/about`) dans `src/data/` ; le composant `Link` les rend et ouvre les liens externes dans un nouvel onglet. Si le site devait un jour revivre sous un sous-dossier (par exemple `https://utilisateur.github.io/depot/`), il suffirait d'ajouter `base: '/depot'` : tout suit automatiquement.
 
 ## Alternative : Netlify
 
-Si un jour le site quitte GitHub Pages : « Add new site » → « Import an existing project » depuis le dépôt, build command `npm run build`, publish directory `dist`, variable `NODE_VERSION=22`. Retirer alors la ligne `base` de `astro.config.mjs` et mettre le domaine Netlify dans `site`. La page 404 (`dist/404.html`) est reconnue automatiquement.
+Si un jour le site quitte GitHub Pages : « Add new site » → « Import an existing project » depuis le dépôt, build command `npm run build`, publish directory `dist`, variable `NODE_VERSION=22`, puis rattacher le domaine dans Netlify et supprimer `public/CNAME` (propre à GitHub Pages). La page 404 (`dist/404.html`) est reconnue automatiquement.
 
 ### Candidatures et contact
 
