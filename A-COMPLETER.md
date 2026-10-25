@@ -36,15 +36,20 @@ Elles existent dans le code, invisibles tant que leur interrupteur `enabled` res
 | **Film de marque** (accueil) | `home.ts`, bloc `film` | L'identifiant de la vidéo YouTube ou Vimeo, et l'image d'attente `home-film-poster.webp` (voir `MEDIAS.md`). |
 | **L'équipe** (About) | `about.ts`, bloc `team` | Prénoms, rôles, portraits (voir `MEDIAS.md`). Uniquement si tu veux montrer l'équipe : la marque la garde volontiers en coulisses. |
 
-## 4. Médias
+## 4. Visuels et chiffres
 
-Aucune image ni vidéo n'est encore en place : chaque emplacement affiche le motif ✦ avec le nom du fichier attendu. La liste complète, les formats et les prompts IA sont dans `MEDIAS.md`. Neuf fichiers sont nécessaires au lancement.
+Plus aucun fichier n'est nécessaire au lancement : les neuf emplacements affichent des visuels codés dans la charte (détail dans `MEDIAS.md`). Une vraie photo ou vidéo peut toujours remplacer un visuel en déposant le fichier sous le nom de l'emplacement.
+
+| Quoi | Où | Comment |
+|---|---|---|
+| **Chiffres réels** (facultatif) | `src/data/visuals.ts`, champs `stat` | Aucun chiffre n'est affiché tant que `value` est vide. Renseigner un nombre (par exemple `value: 128000`, suffixe `'k'` ou `'%'` si besoin) : il apparaît avec un compteur animé dans le visuel concerné (hero, courbe d'audience, barres, anneau). Uniquement des chiffres vérifiables. |
 
 ## 5. Déjà fait, rien à fournir
 
 - **Logo** : le fichier vectoriel fourni (`brand/logo/elevate-her-wordmark.svg`) est rogné à la source : la pointe du E et un liseré en haut manquent, et la queue du « e » final touche le bord. Le site utilise donc un tracé vectoriel refait fidèlement à partir du badge haute définition (`brand/visuels/logo-original.jpg`), enregistré dans `src/assets/elevate-her-wordmark.min.svg`. Les fichiers du dossier `brand/` n'ont pas été modifiés. Si le studio qui a dessiné le logo peut fournir le vectoriel complet, il suffira de le déposer à la place de ce fichier.
 
 - Favicon, icônes et image de partage, générés à partir du badge rond.
+- Les neuf visuels des emplacements médias, codés dans la charte (voir `MEDIAS.md`), avec leurs textes alternatifs.
 - Sitemap, robots.txt, liens canoniques, balises Open Graph et Twitter, données structurées Organization, WebSite et FAQ.
 - Page 404, exclue de l'indexation volontairement. Le site n'héberge aucun formulaire : rien à configurer chez l'hébergeur.
 

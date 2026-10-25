@@ -1,0 +1,13 @@
+---
+/** Parcours 01 : mini planche de marque, grand « Aa » Playfair, petit « Aa » Jost, pastilles de couleur. */
+import { visuals } from '../../data/visuals';
+const v = visuals.brand;
+---
+<div class="absolute inset-0 flex flex-col items-center justify-center gap-[4cqw] p-[10cqw] text-center" data-visual="brand">
+  <p class="font-display text-[36cqw] leading-none text-ink" data-v="rise">{v.word}</p>
+  <p class="font-label text-[9cqw] leading-none text-ink/70" data-v="rise">{v.word}</p>
+  <div class="mt-[4cqw] flex gap-[3cqw]">
+    {v.swatches.map((s) => (<span class:list={['block h-[10cqw] w-[10cqw] rounded-full ring-1 ring-ink/10', s]} data-v="pop"></span>))}
+  </div>
+  <p class="mt-[2cqw] font-label text-[max(0.625rem,3.2cqw)] uppercase tracking-[0.22em] text-rose-deep" data-v="fade">{v.label}</p>
+</div>

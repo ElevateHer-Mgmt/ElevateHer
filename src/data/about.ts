@@ -11,7 +11,7 @@ export const about = {
     /** Version courte affichée sur téléphone à la place de `text`. */
     short: "An ambitious woman shouldn't have to build her brand alone. She stays the face. The team stays behind it.",
     media: 'about-hero',
-    alt: 'A bright creative studio with cream walls, a creator seated at a desk.',
+    alt: 'Three lines of type: Built for her. Backed by a team. Designed for growth.',
   },
   her: {
     eyebrow: 'The name',
@@ -31,7 +31,7 @@ export const about = {
       { title: 'Standards.', text: 'Every creator here was chosen, and knows it.' },
     ],
     media: 'about-club',
-    alt: 'A hand holding a blank invitation card with a round seal, against pale pink silk.',
+    alt: 'An invitation card for the Private Club, sealed with the round Elevate Her badge.',
   },
   how: {
     eyebrow: 'How we work',

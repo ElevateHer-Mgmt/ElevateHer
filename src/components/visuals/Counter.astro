@@ -1,0 +1,14 @@
+---
+/** Chiffre optionnel : rien tant que `value` n'est pas renseigné, sinon compteur animé au scroll. */
+import type { Stat } from '../../data/visuals';
+interface Props { stat: Stat; class?: string }
+const { stat, class: cls = '' } = Astro.props;
+const show = typeof stat.value === 'number';
+const text = show ? stat.value!.toLocaleString('en-US') + (stat.suffix ?? '') : '';
+---
+{show && (
+  <p class:list={['flex items-baseline gap-[2cqw] font-display leading-none text-ink', cls]}>
+    <span data-count={stat.value} data-suffix={stat.suffix ?? ''}>{text}</span>
+    <span class="font-label text-[max(0.625rem,2.8cqw)] uppercase tracking-[0.16em] text-ink/70">{stat.label}</span>
+  </p>
+)}

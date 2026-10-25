@@ -11,7 +11,7 @@ export const services = {
   },
   chapters: [
     {
-      id: 'brand', n: '01', name: 'Brand', title: 'Start with who you *are*.', media: 'path-brand', alt: 'A creator in profile, cream silk blouse, against a plain cream wall.',
+      id: 'brand', n: '01', name: 'Brand', title: 'Start with who you *are*.', media: 'path-brand', alt: 'A mini brand board: a large Aa in serif, a smaller Aa in sans-serif, and four colour swatches.',
       paragraphs: [
         "Everything that comes later depends on this step. We look at what your brand stands for, who it speaks to and where it's going, then we write a strategy for you alone. Not a framework applied to everyone. Yours.",
         'That strategy becomes the reference for every decision after it: what you post, what you say yes to, what you turn down.',
@@ -23,7 +23,7 @@ export const services = {
       outcome: 'You know exactly what your brand is. So does everyone who sees it.',
     },
     {
-      id: 'audience', n: '02', name: 'Audience', title: 'Reach the people who should know *you*.', media: 'path-audience', alt: 'A creator filming herself with a phone on a tripod in a sunlit room.',
+      id: 'audience', n: '02', name: 'Audience', title: 'Reach the people who should know *you*.', media: 'path-audience', alt: 'A growth curve rising from left to right, ending on a highlighted point.',
       paragraphs: [
         'A brand needs to be seen, consistently, without you burning out. We plan your content around your rhythm and your voice, then manage your social presence day to day so your time goes into creating.',
       ],
@@ -34,7 +34,7 @@ export const services = {
       outcome: 'Your audience hears from you regularly, and it always sounds like you.',
     },
     {
-      id: 'growth', n: '03', name: 'Growth', title: 'Momentum, with a team behind *it*.', media: 'path-growth', alt: 'A creator walking with momentum through a bright arched corridor.',
+      id: 'growth', n: '03', name: 'Growth', title: 'Momentum, with a team behind *it*.', media: 'path-growth', alt: 'Five arch-shaped bars rising one after another, from pale pink to deep rose.',
       paragraphs: [
         "Growth isn't a campaign. It's a routine. Your dedicated team follows your numbers, sees what works, adjusts the plan and tells you plainly what comes next. You're not guessing alone.",
       ],
@@ -45,7 +45,7 @@ export const services = {
       outcome: 'Steady progress instead of bursts and silences.',
     },
     {
-      id: 'revenue', n: '04', name: 'Revenue', title: 'Turn attention into *income*.', media: 'path-revenue', alt: 'Hands signing a document with a gold pen on a marble table.',
+      id: 'revenue', n: '04', name: 'Revenue', title: 'Turn attention into *income*.', media: 'path-revenue', alt: 'A ring split into three segments, for several income streams.',
       paragraphs: [
         "An audience is worth building. It's worth more when it pays. Revenue management structures your income around more than one source, follows it closely and grows it with your brand, so money stops being an afterthought.",
       ],
@@ -55,7 +55,7 @@ export const services = {
       outcome: 'Several sources of income, managed. Not one you hope will hold.',
     },
     {
-      id: 'opportunities', n: '05', name: 'Opportunities', title: 'Open the doors that fit your *brand*.', media: 'path-opportunities', alt: 'A creator stepping through a tall arched doorway into the light.',
+      id: 'opportunities', n: '05', name: 'Opportunities', title: 'Open the doors that fit your *brand*.', media: 'path-opportunities', alt: 'Three stacked partnership cards marked Proposal, In talks and Signed.',
       paragraphs: [
         'The right partnership at the right moment can change a year. The wrong one can cost you trust. We develop brand partnerships for you: the right partners, approached the right way, negotiated on terms that respect your image.',
       ],

@@ -11,6 +11,7 @@ import ApplyCta from '../components/ApplyCta.astro';
 import Arcs from '../components/Arcs.astro';
 import Marquee from '../components/Marquee.astro';
 import Media from '../components/Media.astro';
+import Visual from '../components/Visual.astro';
 import Logo from '../components/Logo.astro';
 import Star from '../components/Star.astro';
 import Badge from '../components/Badge.astro';
@@ -43,7 +44,7 @@ const gutter = 'clamp(1rem, 0.5rem + 2.5vw, 3.5rem)';
         <p class="rise label-sm mt-6 text-taupe md:mt-8" style="--i:5">{h.hero.note.join(' · ')}</p>
       </div>
       <div class="rise relative mx-auto mt-10 w-[min(64vw,26rem)] md:mt-20 md:w-[min(50vw,32rem)]" style="--i:4">
-        <Media name={h.hero.media} kind="video" ratio="4 / 5" class="rounded-t-full" eager parallax={6} alt={h.hero.alt} />
+        <Media name={h.hero.media} kind="video" ratio="4 / 5" class="rounded-t-full" eager parallax={6} alt={h.hero.alt}><Visual name={h.hero.media} /></Media>
       </div>
       <Badge class="absolute bottom-12 left-6 hidden h-32 w-32 md:block lg:left-14 lg:h-40 lg:w-40" />
     </section>
@@ -105,7 +106,7 @@ const gutter = 'clamp(1rem, 0.5rem + 2.5vw, 3.5rem)';
               <article class="w-[min(72vw,20rem)] shrink-0 snap-start md:w-[min(56vw,24rem)] lg:w-[min(46vw,38rem)]" data-panel>
                 <div class="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-8">
                   <div data-panel-media>
-                    <Media name={s.media} ratio="4 / 5" class="rounded-t-full" alt={s.alt} />
+                    <Media name={s.media} ratio="4 / 5" class="rounded-t-full" alt={s.alt}><Visual name={s.media} /></Media>
                   </div>
                   <div>
                     <p class="font-display text-6xl font-light leading-none text-ink md:text-7xl">{s.n}</p>
@@ -178,7 +179,7 @@ const gutter = 'clamp(1rem, 0.5rem + 2.5vw, 3.5rem)';
           <p class="mt-6 font-display text-xl italic leading-relaxed md:mt-8" data-reveal>{h.face.closing}</p>
         </div>
         <div data-reveal>
-          <Media name={h.face.media} ratio="4 / 5" class="mx-auto w-[min(64vw,28rem)] rounded-t-full lg:ml-auto" parallax alt={h.face.alt} />
+          <Media name={h.face.media} ratio="4 / 5" class="mx-auto w-[min(64vw,28rem)] rounded-t-full lg:ml-auto" parallax alt={h.face.alt}><Visual name={h.face.media} /></Media>
         </div>
       </div>
     </section>

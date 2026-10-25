@@ -1,0 +1,35 @@
+---
+/**
+ * Hero : « tableau de bord de créatrice » dessiné dans une arche crème posée dans l'arche rose
+ * (même forme que les emplacements du site). La courbe se dévoile à l'arrivée, en CSS, sans JS.
+ */
+import Star from '../Star.astro';
+import Counter from './Counter.astro';
+import { visuals } from '../../data/visuals';
+const v = visuals.dashboard;
+---
+<div class="absolute inset-0" data-visual="dashboard">
+  <div class="absolute inset-x-[9cqw] bottom-0 top-[9cqw] flex flex-col rounded-t-full bg-cream px-[8cqw] pb-[8cqw] pt-[13cqw] shadow-soft" data-tone="cream">
+    <Star class="mx-auto h-[3cqw] w-[3cqw] text-rose" />
+    <p class="mt-[3cqw] text-center font-label text-[max(0.625rem,3.2cqw)] uppercase tracking-[0.2em] text-rose-deep">{v.title}</p>
+    <Counter stat={v.stat} class="mt-[3cqw] justify-center text-[11cqw]" />
+    <svg class="mt-auto block w-full" viewBox="0 0 200 110" fill="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="v-dash-fill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="currentColor" stop-opacity="0.5" class="text-rose" />
+          <stop offset="1" stop-color="currentColor" stop-opacity="0" class="text-rose" />
+        </linearGradient>
+      </defs>
+      <path d="M0 88 C 28 84, 44 70, 68 66 S 108 58, 130 40 S 170 20, 200 10 V 100 H 0 Z" fill="url(#v-dash-fill)" />
+      <line x1="0" y1="100" x2="200" y2="100" class="stroke-rose" stroke-width="1" />
+      <path d="M0 88 C 28 84, 44 70, 68 66 S 108 58, 130 40 S 170 20, 200 10" class="stroke-rose-deep" stroke-width="2.5" stroke-linecap="round" />
+      <circle cx="200" cy="10" r="4" class="fill-rose-deep" />
+      <rect x="-2" y="-2" width="204" height="104" class="v-cover fill-cream" />
+    </svg>
+    <ul class="mt-[4cqw] flex flex-wrap justify-center gap-[2cqw]">
+      {v.legend.map((l, i) => (
+        <li class:list={['rounded-full px-[3cqw] py-[1.4cqw] font-label text-[max(0.5625rem,2.7cqw)] uppercase tracking-[0.16em]', i === 0 ? 'bg-ink text-cream' : 'bg-rose-pale text-ink']}>{l}</li>
+      ))}
+    </ul>
+  </div>
+</div>

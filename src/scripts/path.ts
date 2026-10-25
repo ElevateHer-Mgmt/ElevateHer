@@ -4,6 +4,7 @@
  * Mobile ou mouvement réduit : carrousel natif (scroll-snap), la barre de progression suit.
  */
 import { gsap, ScrollTrigger, prefersReducedMotion } from './motion';
+import { buildVisualTimeline } from './visuals';
 
 export function initPath() {
   const section = document.querySelector<HTMLElement>('#path');
@@ -48,14 +49,24 @@ export function initPath() {
         onUpdate: (self) => setProgress(self.progress),
       },
     });
-    // Les médias glissent légèrement pendant le défilement horizontal
-    panels.forEach((panel) => {
+    // Les médias glissent légèrement pendant le défilement horizontal,
+    // et chaque visuel codé s'anime quand son panneau entre dans la vue.
+    panels.forEach((panel, i) => {
       const media = panel.querySelector<HTMLElement>('[data-panel-media]');
-      if (!media) return;
-      gsap.fromTo(media, { yPercent: 5 }, {
-        yPercent: -5, ease: 'none',
-        scrollTrigger: { containerAnimation: tween, trigger: panel, start: 'left right', end: 'right left', scrub: true },
-      });
+      if (media) {
+        gsap.fromTo(media, { yPercent: 5 }, {
+          yPercent: -5, ease: 'none',
+          scrollTrigger: { containerAnimation: tween, trigger: panel, start: 'left right', end: 'right left', scrub: true },
+        });
+      }
+      const visual = panel.querySelector<HTMLElement>('[data-visual]');
+      if (visual) {
+        const vt = buildVisualTimeline(visual);
+        const play = (self: ScrollTrigger) => { vt.play(); self.kill(); };
+        // Premier panneau : déjà en vue quand la section s'épingle, il joue à l'arrivée de la section
+        if (i === 0) ScrollTrigger.create({ trigger: section, start: 'top 60%', onEnter: play });
+        else ScrollTrigger.create({ containerAnimation: tween, trigger: panel, start: 'left 85%', onEnter: play });
+      }
     });
     setProgress(0);
     return () => { tween.kill(); gsap.set(rail, { clearProps: 'transform' }); };

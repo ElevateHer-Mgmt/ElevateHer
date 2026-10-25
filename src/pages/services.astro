@@ -6,6 +6,7 @@ import PageHero from '../components/PageHero.astro';
 import ApplyCta from '../components/ApplyCta.astro';
 import Arcs from '../components/Arcs.astro';
 import Media from '../components/Media.astro';
+import Visual from '../components/Visual.astro';
 import Star from '../components/Star.astro';
 import Link from '../components/Link.astro';
 import { services as s } from '../data/services';
@@ -21,7 +22,7 @@ import { accent } from '../lib/accent';
       <section id={c.id} class="container-page scroll-mt-40 py-14 md:py-32" data-chapter={c.id}>
         <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-16">
           <div class:list={['lg:col-span-5', i % 2 === 1 ? 'lg:order-last' : '']} data-reveal>
-            <Media name={c.media} ratio="4 / 5" class="mx-auto w-[min(64vw,26rem)] rounded-t-full" parallax alt={c.alt} />
+            <Media name={c.media} ratio="4 / 5" class="mx-auto w-[min(64vw,26rem)] rounded-t-full" parallax alt={c.alt}><Visual name={c.media} /></Media>
           </div>
           <div class="lg:col-span-7">
             <p class="font-display text-6xl font-light leading-none text-ink md:text-7xl" data-reveal>{c.n}</p>

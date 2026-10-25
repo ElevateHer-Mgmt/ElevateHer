@@ -1,0 +1,19 @@
+---
+/** « She stays the face » : la créatrice au centre, les rôles de l'équipe autour, reliés par des traits. */
+import { visuals } from '../../data/visuals';
+const v = visuals.team;
+const pos = [[100, 46], [164, 125], [100, 204], [36, 125]];
+---
+<div class="absolute inset-0 flex items-center justify-center p-[5cqw]" data-visual="team">
+  <svg class="block h-full w-full" viewBox="0 0 200 250" fill="none" aria-hidden="true">
+    {pos.map(([x, y]) => (<line x1="100" y1="125" x2={x} y2={y} class="stroke-rose" stroke-width="1.2" data-v="fade" />))}
+    <circle cx="100" cy="125" r="33" class="fill-cream stroke-rose-deep" stroke-width="1.5" data-v="pop" />
+    <text x="100" y="126" text-anchor="middle" dominant-baseline="middle" class="font-display fill-ink" font-size="19" data-v="fade">{v.center}</text>
+    {pos.map(([x, y], i) => (
+      <g data-v="pop">
+        <circle cx={x} cy={y} r="25" class="fill-cream stroke-rose" stroke-width="1.2" />
+        <text x={x} y={y + 0.5} text-anchor="middle" dominant-baseline="middle" class="font-label fill-rose-deep" font-size="6.2" letter-spacing="0.6">{v.roles[i]}</text>
+      </g>
+    ))}
+  </svg>
+</div>

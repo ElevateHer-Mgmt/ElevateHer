@@ -20,7 +20,7 @@ const START = 'top 90%';
 const triggers = new WeakMap<Element, ScrollTrigger>();
 
 /** Vrai si l'élément est déjà visible ou déjà dépassé : il reste tel quel, sans animation d'entrée. */
-function alreadySeen(el: Element) {
+export function alreadySeen(el: Element) {
   const rect = el.getBoundingClientRect();
   return rect.top < window.innerHeight * 0.92;
 }
@@ -31,7 +31,7 @@ function alreadySeen(el: Element) {
  * redécoupe un titre). Sans ce drapeau, plusieurs tweens peuvent partager un même élément
  * (ex. un bloc révélé qui contient aussi des arcs décoratifs).
  */
-function playOnEnter(trigger: Element, tween: gsap.core.Tween, delay = 0, replace = false) {
+export function playOnEnter(trigger: Element, tween: gsap.core.Animation, delay = 0, replace = false) {
   if (replace) triggers.get(trigger)?.kill();
   if (delay) tween.delay(delay);
   const st = ScrollTrigger.create({
@@ -116,7 +116,8 @@ export function initMotion() {
         const target = parseFloat(el.dataset.count ?? '');
         if (Number.isNaN(target) || alreadySeen(el)) return;
         const obj = { v: 0 };
-        const tween = gsap.to(obj, { v: target, duration: 1.8, ease: 'power3.out', paused: true, onUpdate: () => { el.textContent = Math.round(obj.v).toLocaleString('en-US'); } });
+        const suffix = el.dataset.suffix ?? '';
+        const tween = gsap.to(obj, { v: target, duration: 1.8, ease: 'power3.out', paused: true, onUpdate: () => { el.textContent = Math.round(obj.v).toLocaleString('en-US') + suffix; } });
         playOnEnter(el, tween);
       });
 

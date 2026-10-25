@@ -1,0 +1,20 @@
+---
+/** Parcours 02 : courbe de croissance qui se dévoile au scroll, point final mis en avant. Libellé sous la courbe, hors de l'arrondi. */
+import Counter from './Counter.astro';
+import { visuals } from '../../data/visuals';
+const v = visuals.audience;
+const dots = [[0, 125], [50, 112], [100, 88], [150, 50]];
+---
+<div class="absolute inset-x-0 bottom-0 top-[40cqw] flex flex-col px-[10cqw] pb-[10cqw]" data-visual="audience">
+  <svg class="block min-h-0 w-full flex-1" viewBox="0 0 200 150" preserveAspectRatio="xMidYMax meet" fill="none" aria-hidden="true">
+    <line x1="0" y1="140" x2="200" y2="140" class="stroke-ink/15" stroke-width="1" />
+    <path d="M0 125 C 30 122, 50 110, 75 100 S 115 80, 140 58 S 180 25, 200 14" class="stroke-ink" stroke-width="2.5" stroke-linecap="round" />
+    {dots.map(([x, y]) => (<circle cx={x} cy={y} r="3.5" class="fill-rose-deep" />))}
+    <rect x="-2" y="-2" width="204" height="146" class="fill-rose-pale" data-v="cover" />
+    <circle cx="200" cy="14" r="6" class="fill-rose-deep" data-v="pop" data-at="1.45" />
+  </svg>
+  <div class="mt-[4cqw] flex items-end justify-between gap-[4cqw]">
+    <p class="font-label text-[max(0.625rem,3.4cqw)] uppercase tracking-[0.22em] text-rose-deep" data-v="fade">{v.label}</p>
+    <Counter stat={v.stat} class="text-[9cqw]" />
+  </div>
+</div>

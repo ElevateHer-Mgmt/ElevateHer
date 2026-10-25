@@ -1,0 +1,23 @@
+---
+/** Parcours 03 : cinq barres en forme d'arche qui montent une à une. Proportions de dessin, pas des données. */
+import Counter from './Counter.astro';
+import { visuals } from '../../data/visuals';
+const v = visuals.growth;
+const bars = [
+  { h: 28, c: 'bg-rose/50' },
+  { h: 42, c: 'bg-rose/70' },
+  { h: 56, c: 'bg-rose' },
+  { h: 72, c: 'bg-rose-accent' },
+  { h: 90, c: 'bg-rose-deep' },
+];
+---
+<div class="absolute inset-x-0 bottom-0 top-[44cqw] flex flex-col px-[10cqw] pb-[10cqw]" data-visual="growth">
+  <div class="flex h-[52cqw] items-end justify-between gap-[3cqw]">
+    {bars.map((b) => (<span class:list={['block w-full rounded-t-full', b.c]} style={`height:${b.h}%`} data-v="bar"></span>))}
+  </div>
+  <div class="mt-[3cqw] h-px w-full bg-ink/15"></div>
+  <div class="mt-[4cqw] flex items-end justify-between gap-[4cqw]">
+    <p class="font-label text-[max(0.625rem,3.4cqw)] uppercase tracking-[0.22em] text-rose-deep" data-v="fade">{v.label}</p>
+    <Counter stat={v.stat} class="text-[9cqw]" />
+  </div>
+</div>

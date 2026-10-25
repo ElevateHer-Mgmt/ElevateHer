@@ -1,0 +1,15 @@
+---
+/** About, hero : composition typographique des trois promesses, séparées d'étoiles. */
+import Star from '../Star.astro';
+import { visuals } from '../../data/visuals';
+const v = visuals.aboutHero;
+---
+<div class="absolute inset-0 flex flex-col items-center justify-center p-[6cqw] text-center" data-visual="about-hero">
+  <Star class="h-[2.4cqw] w-[2.4cqw] text-rose-deep" data-v="pop" />
+  <p class="mt-[3cqw] font-display text-[max(1.5rem,7cqw)] leading-[1.1] text-ink" data-v="rise">{v.lines[0]}</p>
+  <p class="font-display text-[max(1.5rem,7cqw)] italic leading-[1.1] [color:var(--color-rose-deep)]" data-v="rise">{v.lines[1]}</p>
+  <p class="font-display text-[max(1.5rem,7cqw)] leading-[1.1] text-ink" data-v="rise">{v.lines[2]}</p>
+  <p class="mt-[4cqw] flex items-center gap-[2.4cqw] font-label text-[max(0.625rem,2.2cqw)] uppercase tracking-[0.26em] text-ink/70" data-v="fade">
+    {v.footer.map((w, i) => (<>{i > 0 && <Star class="h-[1.4cqw] w-[1.4cqw] text-rose" />}<span>{w}</span></>))}
+  </p>
+</div>

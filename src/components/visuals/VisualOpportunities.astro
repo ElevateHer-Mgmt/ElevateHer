@@ -1,0 +1,22 @@
+---
+/** Parcours 05 : trois cartes de partenariat empilées, chacune avec un statut. Aucune marque nommée. */
+import { visuals } from '../../data/visuals';
+const v = visuals.opportunities;
+const pill = ['ring-1 ring-rose text-rose-deep', 'bg-rose-pale text-ink', 'bg-ink text-cream'];
+---
+<div class="absolute inset-0 flex items-center justify-center p-[9cqw]" data-visual="opportunities">
+  <div class="relative h-[66cqw] w-full">
+    {v.cards.map((c, i) => (
+      <div class="absolute inset-x-0 rounded-[4cqw] bg-cream p-[4.5cqw] shadow-soft ring-1 ring-ink/5" style={`top:${i * 22}cqw`} data-v="rise" data-tone="cream">
+        <div class="flex items-center gap-[2.5cqw]">
+          <span class="block h-[7cqw] w-[7cqw] shrink-0 rounded-full bg-rose-pale ring-1 ring-rose"></span>
+          <div class="min-w-0 flex-1">
+            <p class="truncate font-display text-[max(0.75rem,4cqw)] text-ink">{v.title}</p>
+            <div class="mt-[1.5cqw] h-px w-[55%] bg-ink/10"></div>
+          </div>
+          <span class:list={['shrink-0 rounded-full px-[2.2cqw] py-[1.1cqw] font-label text-[max(0.5rem,2.3cqw)] uppercase tracking-[0.12em]', pill[i]]}>{c.status}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

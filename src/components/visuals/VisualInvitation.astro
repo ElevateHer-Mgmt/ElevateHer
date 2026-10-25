@@ -1,0 +1,21 @@
+---
+/** About, Private Club : carte d'invitation, sceau rond du logo. */
+import Star from '../Star.astro';
+import Badge from '../Badge.astro';
+import { visuals } from '../../data/visuals';
+const v = visuals.invitation;
+---
+<div class="absolute inset-0 flex items-center justify-center p-[11cqw]" data-visual="invitation">
+  <div class="relative w-full">
+    <div class="rounded-[3cqw] bg-cream p-[5cqw] shadow-soft" data-v="rise" data-tone="cream">
+      <div class="rounded-[2cqw] border border-rose px-[5cqw] py-[9cqw] text-center">
+        <Star class="mx-auto h-[3cqw] w-[3cqw] text-rose-deep" />
+        <p class="mt-[4cqw] font-label text-[max(0.625rem,3cqw)] uppercase tracking-[0.24em] text-rose-deep">{v.eyebrow}</p>
+        <p class="mt-[3cqw] font-display text-[max(1.75rem,12cqw)] italic leading-none text-ink">{v.title}</p>
+        <div class="mx-auto mt-[5cqw] h-px w-[40%] bg-rose"></div>
+        {v.lines.map((l) => (<p class="mt-[2.5cqw] font-display text-[max(0.8125rem,4.4cqw)] leading-tight text-taupe">{l}</p>))}
+      </div>
+    </div>
+    <div class="absolute -bottom-[7cqw] -right-[5cqw] h-[30cqw] w-[30cqw]" data-v="seal"><Badge class="h-full w-full" spin={false} /></div>
+  </div>
+</div>

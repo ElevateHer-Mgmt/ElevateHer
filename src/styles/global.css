@@ -291,6 +291,16 @@
 }
 @media (prefers-reduced-motion: reduce) { .rise { animation: none; } }
 .reduced .rise { animation: none; }
+/* Visuel du hero : le cache glisse et dévoile la courbe à l'arrivée (CSS, sans JS) */
+.v-cover { transform-box: fill-box; transform-origin: 100% 50%; animation: v-uncover 1.6s var(--ease-out-quint) 0.9s both; }
+@keyframes v-uncover { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@media (prefers-reduced-motion: reduce) { .v-cover { animation: none; transform: scaleX(0); } }
+.reduced .v-cover { animation: none; transform: scaleX(0); }
+
+/* Caches des courbes animées par GSAP : retirés sans JavaScript, en mouvement réduit ou si l'animation a échoué,
+   la courbe est alors visible d'emblée (aucune origine CSS ici : GSAP gère la sienne sur les éléments SVG) */
+html:not(.js) [data-v="cover"], .reduced [data-v="cover"], .no-motion [data-v="cover"] { display: none; }
+
 /* Le masque des lignes (SplitText) doit laisser passer les descendantes */
 .split-line-mask { padding-bottom: 0.16em; margin-bottom: -0.16em; }
 
@@ -338,6 +348,7 @@
 [data-tone="rose"] .text-rose-deep { color: var(--color-ink); }
 [data-tone="rose"] .link-line { color: var(--color-ink); }
 [data-tone="rose"] h1 em, [data-tone="rose"] h2 em, [data-tone="rose"] .display em, [data-tone="rose"] .h2 em { color: var(--color-ink); }
+[data-tone="cream"] .text-rose-deep { color: var(--color-rose-deep); } /* cartes crème dans un visuel rose */
 [data-tone="tint"] .link-line { color: var(--color-ink); }
 [data-tone="tint"] h1 em, [data-tone="tint"] h2 em, [data-tone="tint"] .display em, [data-tone="tint"] .title em, [data-tone="tint"] .h2 em { color: var(--color-rose-deep); }
 

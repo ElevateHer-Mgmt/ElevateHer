@@ -1,7 +1,9 @@
 ---
 /**
  * Emplacement média. Affiche le fichier dès qu'il existe dans public/medias/,
- * sinon un fond rose pâle à motif ✦ au ratio exact (aucun décalage de mise en page).
+ * sinon le visuel codé passé en contenu (<Media><Visuel /></Media>), sinon un fond rose pâle
+ * à motif ✦. Toujours au ratio exact (aucun décalage de mise en page).
+ * Avec un visuel codé, le conteneur porte role="img" et le texte alternatif.
  *   images : public/medias/images/<name>.webp (ou .jpg)
  *   vidéos : public/medias/videos/<name>.mp4 (+ .webm) et <name>-poster.webp
  * `parallax` : léger décalage vertical au scroll (desktop, sauf reduced-motion).
@@ -35,10 +37,11 @@ const poster = exists(`videos/${name}-poster.webp`) ? withBase(`/medias/videos/$
 const hasVideo = kind === 'video' && mp4;
 const hasImage = kind === 'image' && img;
 const placeholder = !hasVideo && !hasImage && !poster;
+const hasVisual = placeholder && Astro.slots.has('default');
 const innerClass = 'absolute inset-0 h-full w-full object-cover';
 const px = parallax === true ? 10 : parallax || 0;
 ---
-<div class:list={['relative overflow-hidden bg-rose-pale', cls]} style={`aspect-ratio:${ratio}`} data-media={name} data-media-kind={kind} data-parallax={px ? px : undefined}>
+<div class:list={['@container relative overflow-hidden bg-rose-pale', cls]} style={`aspect-ratio:${ratio}`} data-media={name} data-media-kind={kind} data-parallax={px && !hasVisual ? px : undefined} role={hasVisual && alt ? 'img' : undefined} aria-label={hasVisual && alt ? alt : undefined} data-tone={hasVisual ? 'rose' : undefined}>
   {hasImage && (
     <img src={img!} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" class={innerClass} data-parallax-inner />
   )}
@@ -51,7 +54,10 @@ const px = parallax === true ? 10 : parallax || 0;
   {!hasVideo && kind === 'video' && poster && (
     <img src={poster} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" class={innerClass} data-parallax-inner />
   )}
-  {placeholder && (
+  {hasVisual && (
+    <div class="absolute inset-0" aria-hidden="true"><slot /></div>
+  )}
+  {placeholder && !hasVisual && (
     <div class="star-pattern absolute inset-0" data-parallax-inner aria-hidden="true"></div>
   )}
   {hasVideo && (
@@ -60,7 +66,7 @@ const px = parallax === true ? 10 : parallax || 0;
       <svg class="ml-0.5 hidden h-4 w-4" viewBox="0 0 24 24" aria-hidden="true" data-icon-play><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
     </button>
   )}
-  {placeholder && showLabel && (
+  {placeholder && !hasVisual && showLabel && (
     <span class="label-sm absolute inset-x-0 bottom-4 text-center text-ink/70 select-none" aria-hidden="true">{name}</span>
   )}
 </div>

@@ -1,0 +1,7 @@
+---
+/** Rend le visuel codé qui correspond à un nom d'emplacement média (voir visuals/index.ts). */
+import { visualFor } from './visuals/index';
+interface Props { name: string }
+const V = visualFor[Astro.props.name];
+---
+{V && <V />}
