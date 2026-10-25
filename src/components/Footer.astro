@@ -1,5 +1,5 @@
 ---
-/** Footer crème, bandeau slogan rose pâle en écho à la bannière de la marque. */
+/** Footer crème, bandeau slogan rose pâle en écho à la bannière de la marque. Sur téléphone, Explore et Legal se replient. */
 import Logo from './Logo.astro';
 import Star from './Star.astro';
 import Link from './Link.astro';
@@ -11,7 +11,28 @@ import { footer } from '../data/site';
       <Logo class="h-14 md:h-16" />
       <p class="mt-6 max-w-sm text-taupe md:mt-8">{footer.description}</p>
     </div>
-    <div class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-7 lg:col-start-6">
+    <!-- Téléphone : Explore et Legal repliés, Connect sur une ligne -->
+    <div class="border-t border-rose/50 sm:hidden">
+      {footer.columns.map((col) => col.links.length > 1 ? (
+        <details class="group border-b border-rose/50">
+          <summary class="label-sm flex min-h-12 cursor-pointer list-none items-center justify-between text-rose-deep [&::-webkit-details-marker]:hidden">
+            {col.title}<Star class="h-2.5 w-2.5 text-rose-deep transition-transform duration-300 group-open:rotate-45 motion-reduce:transition-none" />
+          </summary>
+          <ul class="space-y-1 pb-3">
+            {col.links.map((l) => (
+              <li><Link href={l.href} class="inline-flex min-h-11 items-center font-display text-lg text-ink">{l.label}</Link></li>
+            ))}
+          </ul>
+        </details>
+      ) : (
+        <div class="flex min-h-12 items-center justify-between border-b border-rose/50">
+          <span class="label-sm text-rose-deep">{col.title}</span>
+          {col.links.map((l) => (<Link href={l.href} class="inline-flex min-h-11 items-center font-display text-lg text-ink">{l.label}</Link>))}
+        </div>
+      ))}
+    </div>
+    <!-- Tablette et ordinateur : trois colonnes -->
+    <div class="hidden gap-10 sm:grid sm:grid-cols-3 lg:col-span-7 lg:col-start-6">
       {footer.columns.map((col) => (
         <div>
           <p class="label-sm text-rose-deep">{col.title}</p>

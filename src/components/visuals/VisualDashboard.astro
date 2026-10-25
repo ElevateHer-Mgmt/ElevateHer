@@ -1,7 +1,7 @@
 ---
 /**
  * Hero : « tableau de bord de créatrice » dessiné dans une arche crème posée dans l'arche rose
- * (même forme que les emplacements du site). La courbe se dévoile à l'arrivée, en CSS, sans JS.
+ * (même forme que les emplacements du site). La courbe se dévoile à l'arrivée (GSAP, joué au chargement).
  */
 import Star from '../Star.astro';
 import Counter from './Counter.astro';
@@ -23,8 +23,8 @@ const v = visuals.dashboard;
       <path d="M0 88 C 28 84, 44 70, 68 66 S 108 58, 130 40 S 170 20, 200 10 V 100 H 0 Z" fill="url(#v-dash-fill)" />
       <line x1="0" y1="100" x2="200" y2="100" class="stroke-rose" stroke-width="1" />
       <path d="M0 88 C 28 84, 44 70, 68 66 S 108 58, 130 40 S 170 20, 200 10" class="stroke-rose-deep" stroke-width="2.5" stroke-linecap="round" />
-      <circle cx="200" cy="10" r="4" class="fill-rose-deep" />
-      <rect x="-2" y="-2" width="204" height="104" class="v-cover fill-cream" />
+      <rect x="-2" y="-2" width="204" height="104" class="fill-cream" data-v="cover" />
+      <circle cx="200" cy="10" r="4" class="fill-rose-deep" data-v="pop" data-at="1.4" />
     </svg>
     <ul class="mt-[4cqw] flex flex-wrap justify-center gap-[2cqw]">
       {v.legend.map((l, i) => (

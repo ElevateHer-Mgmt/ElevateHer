@@ -1,10 +1,14 @@
 /**
- * Animations des visuels codés (transform et opacity uniquement), au scroll, GSAP.
+ * Animations des visuels codés (transform et opacity uniquement), GSAP.
  * Chaque élément porte data-v : rise (monte), pop (apparaît en grandissant), bar (barre qui monte),
  * cover (cache qui glisse pour « tracer » une courbe), seal (sceau qui se pose), fade.
  * data-at fixe la position dans la timeline (secondes). Sans JS ou en mouvement réduit : état final.
+ *
+ * Déclenchement : quand le visuel est réellement visible (IntersectionObserver, 35 % de sa surface),
+ * ce qui vaut aussi dans le carrousel horizontal du parcours sur téléphone. Le hero joue au chargement.
+ * Sur grand écran, les panneaux du parcours épinglé sont déclenchés par path.ts (défilement horizontal).
  */
-import { gsap, prefersReducedMotion, alreadySeen, playOnEnter } from './motion';
+import { gsap, prefersReducedMotion } from './motion';
 
 export function buildVisualTimeline(root: HTMLElement) {
   // immediateRender + lazy:false : l'état de départ (invisible) est posé tout de suite, sans attendre un tick
@@ -23,14 +27,26 @@ export function buildVisualTimeline(root: HTMLElement) {
   return tl;
 }
 
-/** Visuels hors parcours épinglé (celui-ci est géré par path.ts sur grand écran). */
 export function initVisuals() {
   if (prefersReducedMotion()) return;
   const desktopRail = window.matchMedia('(min-width: 1024px)').matches;
+  const pending = new Map<Element, gsap.core.Timeline>();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      const tl = pending.get(e.target);
+      if (!tl || !e.isIntersecting) return;
+      tl.play();
+      pending.delete(e.target);
+      io.unobserve(e.target);
+      (e.target as HTMLElement).dataset.played = '';
+    });
+  }, { threshold: 0.35 });
+
   gsap.utils.toArray<HTMLElement>('[data-visual]').forEach((root) => {
-    if (root.dataset.visual === 'dashboard') return; // hero : animation CSS, non bloquante pour le LCP
-    if (desktopRail && root.closest('[data-panel]')) return;
-    if (alreadySeen(root)) return;
-    playOnEnter(root, buildVisualTimeline(root));
+    if (desktopRail && root.closest('[data-panel]')) return; // géré par path.ts
+    const tl = buildVisualTimeline(root);
+    if (root.dataset.visual === 'dashboard') { tl.delay(0.7).play(); root.dataset.played = ''; return; }
+    pending.set(root, tl);
+    io.observe(root);
   });
 }

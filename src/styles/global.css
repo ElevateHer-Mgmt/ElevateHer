@@ -291,12 +291,6 @@
 }
 @media (prefers-reduced-motion: reduce) { .rise { animation: none; } }
 .reduced .rise { animation: none; }
-/* Visuel du hero : le cache glisse et dévoile la courbe à l'arrivée (CSS, sans JS) */
-.v-cover { transform-box: fill-box; transform-origin: 100% 50%; animation: v-uncover 1.6s var(--ease-out-quint) 0.9s both; }
-@keyframes v-uncover { from { transform: scaleX(1); } to { transform: scaleX(0); } }
-@media (prefers-reduced-motion: reduce) { .v-cover { animation: none; transform: scaleX(0); } }
-.reduced .v-cover { animation: none; transform: scaleX(0); }
-
 /* Caches des courbes animées par GSAP : retirés sans JavaScript, en mouvement réduit ou si l'animation a échoué,
    la courbe est alors visible d'emblée (aucune origine CSS ici : GSAP gère la sienne sur les éléments SVG) */
 html:not(.js) [data-v="cover"], .reduced [data-v="cover"], .no-motion [data-v="cover"] { display: none; }
